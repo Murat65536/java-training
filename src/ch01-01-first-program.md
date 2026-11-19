@@ -4,10 +4,10 @@ Robot code comes later. First you need the basics of Java, and we'll learn them 
 
 We write and run code in a program called **WPILib VS Code**. It works a bit like a word processor for code: you type code into it, and it can run that code for you. If you're on one of the robotics laptops, it's already installed. It's also the same program we use for the real robot code.
 
-On your own computer, you can install it by following [WPILib's install guide](https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/wpilib-setup.html). Make sure the version you download starts with **2027**. This book is written for 2027, and older versions can't run its robot code.
+On your own computer, you can install it by following [WPILib's install guide](https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/wpilib-setup.html).
 
 ## Step 1: Open VS Code
-Find the desktop icon whose name starts with a year and ends with **WPILib VS Code**, like **2027 WPILib VS Code**, and double-click it.
+Find the desktop icon whose name starts with a year and ends with **WPILib VS Code**, like **2026 WPILib VS Code**, and double-click it.
 
 If it isn't on the desktop, press the Windows key, type `WPILib`, and click the **WPILib VS Code** that comes up.
 
