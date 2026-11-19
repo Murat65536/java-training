@@ -1,6 +1,6 @@
 # Working Together
 
-A real robot's code isn't written by one person. A team of programmers works on it at once, all season: one adds a climber, another tunes the drivetrain, a third fixes a bug in autonomous, all in the same project. Without a way to keep track, people would overwrite each other's work, and nobody would know who changed what or how to get back yesterday's working version.
+Robot code often has several programmers working on it at once over a season: one adds a climber, another tunes the drivetrain, a third fixes a bug in autonomous, all in the same project. Without a way to keep track, people would overwrite each other's work, and nobody would know who changed what or how to get back yesterday's working version.
 **Git** solves this. It's a program that records every change ever made to a project. Our team keeps its robot code on **GitHub**, a website that stores Git projects so everyone can share them.
 
 ## The words
