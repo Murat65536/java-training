@@ -1,0 +1,83 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Inside this method, whose health does `isAlive()` check?
+
+```java
+void attack(Player target) {
+    if (isAlive()) {
+        target.takeDamage(10);
+    }
+}
+```
+"""
+prompt.distractors = [
+  "The `Player` being attacked (`target`)",
+  "Both of them",
+  "Nobody's, because `isAlive()` needs something in front of it",
+]
+answer.answer = "The `Player` doing the attacking"
+context = """
+With nothing in front of it, `isAlive()` means the `Player` that `attack` was called on. In `bob.attack(alice)`, that's `bob`. To ask about the target instead, you'd write `target.isAlive()`.
+"""
+id = "ad5c1a61-e485-4fb8-b523-3292726a8392"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Which of these is a correct way to start a method that takes a `Player` named `friend`?"
+prompt.distractors = [
+  "`void hug(friend) {`",
+  "`void hug(Player) {`",
+  "`void hug(friend Player) {`",
+]
+answer.answer = "`void hug(Player friend) {`"
+context = """
+A parameter is a variable, so it needs a type and then a name, in that order, just like `int startingHealth`. Here the type is `Player` and the name is `friend`.
+"""
+id = "89e90bee-a7a1-4854-836e-950153c26cc2"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Here's a class:
+
+```java
+class Player {
+    int health;
+
+    Player(int startingHealth) {
+        health = startingHealth;
+    }
+
+    void takeDamage(int amount) {
+        health = health - amount;
+    }
+
+    void attack(Player target) {
+        if (isAlive()) {
+            target.takeDamage(10);
+        }
+    }
+
+    boolean isAlive() {
+        return health > 0;
+    }
+}
+```
+
+What is `alice.health` after this code runs?
+
+```java
+Player bob = new Player(100);
+Player alice = new Player(100);
+bob.attack(alice);
+alice.attack(bob);
+bob.attack(alice);
+```
+"""
+prompt.distractors = ["90", "70", "100"]
+answer.answer = "80"
+context = """
+`bob` attacks `alice` twice, so `alice` takes 20 damage. When `alice` attacks `bob`, only `bob` gets hurt.
+"""
+id = "08b68a1b-cf62-4dd4-9a70-a9d60560f3bd"

@@ -1,0 +1,63 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+The arm's target is 80 degrees, and it's at 70. `KP` is 0.3, and `KI` and `KD` are both 0. How many volts does `pid.calculate` give back?
+"""
+prompt.distractors = [
+  "0.3",
+  "21",
+  "-3",
+]
+answer.answer = "3"
+context = """
+The error is 80 - 70 = 10 degrees, and P pushes `KP` volts for every degree of error: 0.3 × 10 = 3. If the arm were above the target, the error would be negative, and so would the voltage.
+"""
+id = "92ac2b59-9917-4ce8-b426-11b07d6b1c69"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Why does a P controller make the arm slow down as it gets close to the target?
+"""
+prompt.distractors = [
+  "`moveTo` checks the distance and switches to a slower speed",
+  "Gravity slows it down near the top",
+  "`MAX_VOLTAGE` gets smaller as the arm moves",
+]
+answer.answer = "The push is in proportion to the error, so it shrinks as the error shrinks"
+context = """
+Nothing has to switch speeds. As the arm gets closer, the error gets smaller, so `KP × error` gets smaller, and the arm slows down all by itself.
+"""
+id = "ef45eb2f-5a43-4f9c-9c63-043f5bbc78e0"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+You're tuning a brand-new mechanism on the real robot. Where should you start with `KP`?
+"""
+prompt.distractors = [
+  "Very big, so you can see right away if it works",
+  "Exactly 1, since that's the default",
+  "It doesn't matter, since PID always finds the right answer",
+]
+answer.answer = "Too small, and then raise it a little at a time"
+context = """
+A gain that's too small just makes the mechanism slow. A gain that's too big can slam it into something and break it. So tuners start small and work their way up, watching each time.
+"""
+id = "180c59b3-7551-44ca-a96e-9fff9dc2d001"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Which part of PID acts like brakes when the mechanism is rushing toward the target?
+"""
+prompt.distractors = [
+  "P",
+  "I",
+  "Feedforward",
+]
+answer.answer = "D"
+context = """
+D looks at how fast the error is changing. When it's shrinking quickly, D pushes back a little, which helps keep the mechanism from overshooting.
+"""
+id = "770167e1-f39e-463d-8ea4-f4bb04e44475"

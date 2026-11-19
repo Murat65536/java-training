@@ -1,0 +1,92 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What does this print?
+
+```java
+System.out.println(10 * 0.5);
+```
+"""
+prompt.distractors = [
+  "5",
+  "10.5",
+  "It's an error, because you can't multiply an `int` by a `double`",
+]
+answer.answer = "5.0"
+context = """
+If either side of the math is a `double`, the answer is a `double`. `0.5` is a `double`, so the answer is `5.0`, even though it happens to be a whole number.
+"""
+id = "e8cf5054-22d7-4feb-8411-e3230d9028d3"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What is `damage` after this line runs?
+
+```java
+int damage = (int) 7.9;
+```
+"""
+prompt.distractors = [
+  "8",
+  "7.9",
+  "It's an error, because `7.9` isn't a whole number",
+]
+answer.answer = "7"
+context = """
+Casting to `int` doesn't round. It chops off everything after the `.`, so `7.9` becomes `7`. To round, you'd use `Math.round`.
+"""
+id = "45967155-08c1-4f54-adf4-7e2d7de3a472"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What does this print?
+
+```java
+System.out.println(7 / 2);
+```
+"""
+prompt.distractors = ["3.5", "4", "3.0"]
+answer.answer = "3"
+context = """
+`7` and `2` are both `int`s, so this is integer division, and the answer is an `int` too. The `.5` gets chopped off. `7.0 / 2` would give `3.5`.
+"""
+id = "1a61b5f6-3eaf-4e7d-bc4d-2ed6fcd3e46f"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+`health` is an `int` set to `70`, and `maxHealth` is an `int` set to `100`. What is `percent`?
+
+```java
+double percent = health / maxHealth * 100;
+```
+"""
+prompt.distractors = [
+  "70.0",
+  "0.7",
+  "It's an error, because you can't put an `int` into a `double`",
+]
+answer.answer = "0.0"
+context = """
+`health / maxHealth` is `70 / 100`, and both are `int`s, so it's integer division: `0.7` gets chopped down to `0`. Then `0 * 100` is `0`. It only becomes a `double` when it's stored in `percent`, and by then the `.7` is already gone.
+"""
+id = "cd7e48d4-7491-47a3-a083-7144e98f1080"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+`health` is an `int` set to `70`, and `maxHealth` is an `int` set to `100`. Which of these gives `70.0`?
+"""
+prompt.distractors = [
+  "`(double) (health / maxHealth) * 100`",
+  "`health / maxHealth * 100.0`",
+  "`(int) health / maxHealth * 100`",
+]
+answer.answer = "`(double) health / maxHealth * 100`"
+context = """
+One side has to be a `double` *before* the division happens. `(double) health` turns `health` into `70.0` first, so the division gives `0.7`.
+In the other three, the division still happens with two `int`s. `(double) (health / maxHealth)` waits until after the division to turn the answer into a `double`, and by then it's already `0`.
+"""
+id = "a3f1022a-5f4c-4e71-b0c6-214688ac0165"

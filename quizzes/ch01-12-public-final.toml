@@ -1,0 +1,121 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Here's a class:
+
+```java
+class Player {
+    private int health;
+    private final int maxHealth;
+
+    Player(int startingHealth) {
+        health = startingHealth;
+        maxHealth = startingHealth;
+    }
+
+    void heal(int amount) {
+        health = health + amount;
+        if (health > maxHealth) {
+            health = maxHealth;
+        }
+    }
+
+    void levelUp() {
+        maxHealth = maxHealth + 10;
+    }
+}
+```
+
+Which part gets a red squiggly line?
+"""
+prompt.distractors = [
+  "The constructor, because it sets `maxHealth`",
+  "`heal`, because it uses `maxHealth`",
+  "Nothing does",
+]
+answer.answer = "`levelUp`, because it changes `maxHealth`"
+context = """
+A `final` field gets set once, and then it can never change. The constructor is where it gets set that one time. Reading it, like `heal` does, is always fine. Only changing it afterwards, like `levelUp` tries to, is a problem.
+"""
+id = "5e297d94-c756-4239-bba9-5688d2385134"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Here's a class that uses our `Weapon`:
+
+```java
+class Knight {
+    private final Weapon sword = new Weapon("Sword", 25);
+
+    public void swing() {
+        sword.use();
+    }
+
+    public void upgrade() {
+        sword = new Weapon("Big Sword", 50);
+    }
+}
+```
+
+Which method gets a red squiggly line?
+"""
+prompt.distractors = [
+  "`swing`, because the sword's durability changes",
+  "Both of them",
+  "Neither of them",
+]
+answer.answer = "`upgrade`, because it points `sword` at a different `Weapon`"
+context = """
+`sword` holds a weapon's address. `final` means it always holds the address of the *same* weapon. The weapon itself can still change, so `swing` is fine. `upgrade` tries to change which weapon `sword` holds, and that's what `final` doesn't allow.
+"""
+id = "81a533a9-cc8e-493c-ab56-bf60003865b3"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+You put `public class Player` in a file named `Game.java`. What happens?
+"""
+prompt.distractors = [
+  "Nothing changes",
+  "All of `Player`'s fields become public",
+  "Java starts the program from `Player` instead of `Game`",
+]
+answer.answer = "A red squiggly line, because a public class has to be in a file with its own name, `Player.java`"
+context = """
+A `public` class has to be in a file with exactly the same name. That's one more reason every class gets its own file, like `Player.java` in our game, and `Arm.java` in robot code.
+"""
+id = "cafe43cb-9464-4ab1-bae5-24edd75de8d2"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Here's part of a robot's arm:
+
+```java
+public class Arm implements Mechanism {
+    ___ final SparkMax motor = new SparkMax(CANPort.CAN_S0, 5, MotorType.kBrushless);
+
+    ___ void setSpeed(double speed) {
+        if (speed > 0.5) {
+            speed = 0.5;
+        } else if (speed < -0.5) {
+            speed = -0.5;
+        }
+        motor.setThrottle(speed);
+    }
+}
+```
+
+Other parts of the robot code need to move the arm, but nothing should ever spin it faster than 0.5. What should go in the two blanks?
+"""
+prompt.distractors = [
+  "`public` for `motor`, and `public` for `setSpeed`",
+  "`public` for `motor`, and `private` for `setSpeed`",
+  "`private` for `motor`, and `private` for `setSpeed`",
+]
+answer.answer = "`private` for `motor`, and `public` for `setSpeed`"
+context = """
+Other code needs to call `setSpeed`, so it's `public`. But if `motor` were public too, any code could call `motor.setThrottle(1)` and skip the speed limit. Making `motor` private means `setSpeed` is the only way to move the arm.
+"""
+id = "34f91fd4-90ed-4a06-85fe-d41095e50e08"

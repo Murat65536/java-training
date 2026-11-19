@@ -1,0 +1,39 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+A beam break's `get()` gives back `true` when the light gets through. What should `hasGamePiece()` give back?
+"""
+prompt.distractors = [
+  "`beamBreak.get()`",
+  "`true`, since the beam break is always there",
+  "`beamBreak.get() == true`",
+]
+answer.answer = "`!beamBreak.get()`"
+context = """
+A game piece blocks the light, so `get()` is `false` when there's a game piece. Flipping it with `!` makes `hasGamePiece()` `true` when there's a game piece. This kind of detail belongs in the IO, so the rest of the code never has to think about it.
+"""
+id = "f991ee8f-db2f-4398-a419-7839656a1ab5"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+When does this command finish?
+
+```java
+run(coroutine -> {
+    io.setThrottle(IntakeConstants.INTAKE_THROTTLE);
+    coroutine.waitUntil(this::hasGamePiece);
+    io.setThrottle(0);
+}).named("Intake.Intake")
+```
+"""
+prompt.distractors = [
+  "Right away, because there's no loop",
+  "After one update",
+  "Never, until something cancels it",
+]
+answer.answer = "Once the sensor says there's a game piece, and the rollers have been stopped"
+context = """
+`waitUntil` keeps yielding until its condition is `true`. Then the command goes on to the next line, stops the rollers, and reaches the end, so it's done.
+"""
+id = "709dfb98-82a0-473a-b03c-64176864be26"

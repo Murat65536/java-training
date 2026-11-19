@@ -1,0 +1,91 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Here's a class:
+
+```java
+class Player {
+    int health;
+}
+```
+
+What is `a.health` after this code runs?
+
+```java
+Player a = new Player();
+a.health = 100;
+Player b = a;
+b.health = 60;
+```
+"""
+prompt.distractors = ["100", "It's an error, because `b` doesn't have its own `health`"]
+answer.answer = "60"
+context = """
+`Player b = a;` copies the *address*, not the `Player`. There's only one `new`, so there's only one `Player`, and `a` and `b` are both names for it. Setting `b.health` sets that one `Player`'s health.
+"""
+id = "c15d4b07-0ab5-4187-8c25-d3ebc8b3bf6d"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What is `x` after this code runs?
+
+```java
+int x = 10;
+int y = x;
+y = y + 5;
+```
+"""
+prompt.distractors = ["15", "5", "It's an error"]
+answer.answer = "10"
+context = """
+`int`s are primitives, so `int y = x;` copies the actual number. After that, `x` and `y` are separate, and changing `y` doesn't touch `x`.
+"""
+id = "c496ebdf-82d7-4f77-a07b-eafef34a39fb"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+How many `Player` objects does this code build?
+
+```java
+Player a = new Player(100);
+Player b = a;
+Player c = new Player(100);
+Player d = c;
+```
+"""
+prompt.distractors = ["4", "1", "3"]
+answer.answer = "2"
+context = """
+Count the `new`s. There are two, so there are two `Player`s. `a` and `b` are names for the first one, and `c` and `d` are names for the second one.
+"""
+id = "9229ae01-6c16-4d70-9403-f9a1690135e6"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Here's a class:
+
+```java
+class Player {
+    int health;
+}
+```
+
+What is `a.health` after this code runs?
+
+```java
+Player a = new Player();
+Player b = new Player();
+a.health = 100;
+b.health = 100;
+b.health = 60;
+```
+"""
+prompt.distractors = ["60", "0", "It's an error"]
+answer.answer = "100"
+context = """
+There are two `new`s here, so `a` and `b` are two separate `Player`s. Changing `b.health` doesn't touch `a`, even though they started with the same health.
+"""
+id = "c5cb4859-0c1f-4c15-9e5e-a86d1aceece2"

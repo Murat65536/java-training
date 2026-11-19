@@ -1,0 +1,67 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+When should you use an `ArrayList` instead of an array?
+"""
+prompt.distractors = [
+  "When the list holds objects instead of numbers",
+  "When you want to use a for-each loop",
+  "Never. Arrays can do everything an `ArrayList` can",
+]
+answer.answer = "When the number of things in the list will change"
+context = """
+An array's length never changes after it's made. An `ArrayList` can grow with `add` and shrink with `remove`. Both work with for-each loops, and both can hold objects.
+"""
+id = "d89807fc-8b72-4ba0-9514-6ad99bc73064"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What does this print?
+
+```java
+ArrayList<Damageable> targets = new ArrayList<>();
+targets.add(new Crate());
+targets.add(new Crate());
+targets.add(new Player(100));
+System.out.println(targets.size());
+```
+"""
+prompt.distractors = ["0", "2", "It's an error, because a list can't hold crates and players together"]
+answer.answer = "3"
+context = """
+A new `ArrayList` starts empty, and each `add` puts one more thing on the end. The list holds `Damageable`s, so crates and players can both go in it.
+"""
+id = "dca2122d-2493-4acd-afa5-a99258153708"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+`ArrayList` gets a red squiggly line saying `ArrayList cannot be resolved to a type`. How do you fix it?
+"""
+prompt.distractors = [
+  "Write `new ArrayList<Damageable>()` instead of `new ArrayList<>()`",
+  "Make a class named `ArrayList`",
+  "Put `import java.util.ArrayList;` right above the line that uses it",
+]
+answer.answer = "Put `import java.util.ArrayList;` at the very top of the file"
+context = """
+`ArrayList` is in the `java.util` package, so Java needs an `import` to know where to find it. Every `import` has to go at the very top of the file that uses `ArrayList`, before even the line that starts the class. VS Code's Quick Fix can add it for you.
+"""
+id = "049f0e7d-d4fe-4c53-8cf8-71a1cda8bd3d"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Which of these gets a red squiggly line?
+"""
+prompt.distractors = [
+  "`ArrayList<Integer> numbers = new ArrayList<>();`",
+  "`ArrayList<Player> players = new ArrayList<>();`",
+  "`List<Player> players = new ArrayList<>();`",
+]
+answer.answer = "`ArrayList<int> numbers = new ArrayList<>();`"
+context = """
+An `ArrayList` can only hold objects, not primitives like `int`. For numbers, use the object version, `Integer`. And `List<Player>` is fine: `List` is an interface, and `ArrayList` implements it.
+"""
+id = "ce6c86ac-19f2-40df-9068-1158f8c6a9a4"

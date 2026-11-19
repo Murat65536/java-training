@@ -1,0 +1,76 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Which line correctly makes an `int` variable named `x` that holds 7?"
+prompt.distractors = [
+  "`x int = 7;`",
+  "`int = 7;`",
+  "`int x = 7`",
+]
+answer.answer = "`int x = 7;`"
+context = """
+The type comes first, then the name, then `=` and the value, and the line ends with a semicolon.
+`int x = 7` is missing its `;`, so Java doesn't know the line is done.
+"""
+id = "58eb21dc-9a71-4c27-910e-b5dc7bbe64e5"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What is `g` after this code runs?
+
+```java
+int v = 42;
+int g = v + 10;
+```
+"""
+prompt.distractors = ["42", "10", "It's an error"]
+answer.answer = "52"
+context = """
+`g` is set to whatever `v + 10` is. Since `v` is 42, that's 52.
+"""
+id = "b5f88284-5ce7-433a-a38d-cd8293765a2f"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Which of these lines gives an error?"
+prompt.distractors = [
+  "`double speed = 2.5;`",
+  "`double speed = 2;`",
+  "`int count = 2;`",
+]
+answer.answer = "`int count = 2.5;`"
+context = """
+An `int` only has room for whole numbers, so there's nowhere to put the `.5`.
+`double speed = 2;` works, though. A `double` can hold whole numbers too, and it stores `2` as `2.0`.
+"""
+id = "18579c39-b59b-499a-ab1d-67eec832ce3e"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Does `boolean ready = 1;` work?"
+prompt.distractors = [
+  "Yes, `1` means `true`",
+  "Yes, but only if it's `1` or `0`",
+]
+answer.answer = "No, a `boolean` can only be `true` or `false`"
+context = """
+A `boolean` isn't a number in Java. The only values it can hold are `true` and `false`, so you'd write `boolean ready = true;` instead.
+"""
+id = "d93966d6-af11-4e5f-b4c1-1963ae4f507c"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What does this print?
+
+```java
+int v = 42;
+System.out.println("v");
+```
+"""
+prompt.distractors = ["`42`", "`\"v\"`", "It's an error"]
+answer.answer = "`v`"
+context = """
+`"v"` is in quotes, so it's just text, and Java prints the letter v. To print 42, leave out the quotes: `System.out.println(v);`
+"""
+id = "6b936762-f1f0-4ab7-b3a6-0f118d1d5618"

@@ -1,0 +1,79 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+When does `moveTo(ArmPosition.SCORING)` finish?
+
+```java
+public Command moveTo(ArmPosition position) {
+    return run(coroutine -> {
+        while (!isAt(position)) {
+            if (getAngleDegrees() < position.getAngleDegrees()) {
+                setThrottle(ArmConstants.MAX_THROTTLE);
+            } else {
+                setThrottle(-ArmConstants.MAX_THROTTLE);
+            }
+            coroutine.yield();
+        }
+        setThrottle(0);
+    }).named("Arm.MoveTo[" + position + "]");
+}
+```
+"""
+prompt.distractors = [
+  "After one turn, when it calls `coroutine.yield()`",
+  "Never. It keeps running until it's canceled",
+  "After exactly 80 turns",
+]
+answer.answer = "When the arm is close enough to the scoring angle, after it stops the arm"
+context = """
+`coroutine.yield()` only pauses the command until its next turn. The loop keeps going until `isAt(position)` is `true`. Then the code after the loop stops the arm, and once the lambda reaches its end, the command is done.
+"""
+id = "da9fc7ca-b3dc-4506-be75-eb1488e1f4de"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+`moveTo(ArmPosition.SCORING)` is running. Then the driver presses the button for `moveTo(ArmPosition.STOWED)`. What happens?
+"""
+prompt.distractors = [
+  "Both commands run at the same time, and the arm doesn't move",
+  "The new command waits until the arm reaches the scoring position",
+  "The new command is ignored, because the arm is busy",
+]
+answer.answer = "The first command is canceled, and the new one takes over the arm"
+context = """
+Both commands require the arm, and only one command can require a mechanism at a time. The new one has the same priority, so it cancels the old one, and the arm turns around.
+"""
+id = "76163969-517f-4f2d-9cf6-c03a470c7d19"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Why does our arm override `idle()` to set the throttle to 0, over and over?
+"""
+prompt.distractors = [
+  "Because `idle()` has to be overridden in every mechanism",
+  "To make the arm go back to the stowed position",
+  "So the arm uses less battery while the robot is disabled",
+]
+answer.answer = "So a command that got canceled can't leave the arm moving"
+context = """
+`Mechanism`'s own `idle()` doesn't do anything. If a `moveTo` got canceled halfway through, the last throttle it set would still be there. Our `idle()` runs whenever nothing else is using the arm, and makes sure it's stopped.
+"""
+id = "bf4d6bc2-4841-469b-aacc-babce37b2fce"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Why does the arm's idle command have `Command.LOWEST_PRIORITY`?
+"""
+prompt.distractors = [
+  "So it runs before every other command",
+  "So it can never be canceled",
+  "Because every command needs a priority before it can be named",
+]
+answer.answer = "So any other command can always take over the arm from it"
+context = """
+A command can only cancel another one if its priority is the same or higher. The idle command should give up the arm to anything that wants it, so it gets the lowest priority there is.
+"""
+id = "c0074d05-4785-47ae-8769-ad3d6a294347"

@@ -1,0 +1,149 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Here's a class:
+
+```java
+class Robot {
+    private static int robotsBuilt;
+
+    public Robot() {
+        robotsBuilt = robotsBuilt + 1;
+    }
+
+    public static int getRobotsBuilt() {
+        return robotsBuilt;
+    }
+}
+```
+
+What does this print?
+
+```java
+Robot a = new Robot();
+Robot b = new Robot();
+Robot c = new Robot();
+System.out.println(Robot.getRobotsBuilt());
+```
+"""
+prompt.distractors = ["1", "0", "It's an error, because `getRobotsBuilt` isn't called on a `Robot`"]
+answer.answer = "3"
+context = """
+`robotsBuilt` is `static`, so there's only one of it, shared by every `Robot`. Each of the three constructors adds 1 to that same number.
+`getRobotsBuilt` is `static` too, so you call it on the class, `Robot`, instead of on an object.
+"""
+id = "ec271b02-4a6a-4409-9e33-2571ad9a3021"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Here's a class:
+
+```java
+class Player {
+    private int score;
+    private static int totalScore;
+
+    public void addPoint() {
+        score = score + 1;
+        totalScore = totalScore + 1;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public static int getTotalScore() {
+        return totalScore;
+    }
+}
+```
+
+After this code runs, what are `bob.getScore()` and `Player.getTotalScore()`?
+
+```java
+Player bob = new Player();
+Player alice = new Player();
+bob.addPoint();
+bob.addPoint();
+alice.addPoint();
+```
+"""
+prompt.distractors = [
+  "2 and 2",
+  "3 and 3",
+  "1 and 3",
+]
+answer.answer = "2 and 3"
+context = """
+`score` is a normal field, so `bob` and `alice` each have their own. `bob` got 2 points.
+`totalScore` is `static`, so there's only one, shared by everyone. All three points went into it.
+"""
+id = "a527d55f-5de0-45f3-b0fe-944b2db658de"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Here's a class:
+
+```java
+class Player {
+    private static int playersCreated;
+    private int health;
+    private int maxHealth;
+
+    public static int getPlayersCreated() {
+        return playersCreated;
+    }
+
+    public static boolean isHurt() {
+        return health < maxHealth;
+    }
+}
+```
+
+Which method gets a red squiggly line?
+"""
+prompt.distractors = [
+  "`getPlayersCreated`",
+  "Both of them",
+  "Neither of them",
+]
+answer.answer = "`isHurt`"
+context = """
+A `static` method isn't called on any object, so it can't use normal fields. When you call `Player.isHurt()`, there's no `Player` whose `health` it could check.
+`getPlayersCreated` is fine, because `playersCreated` is `static` too. There's only one, so Java knows which one you mean.
+"""
+id = "d6fd6501-199a-4174-8efa-1920028854ae"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+This code gets a red squiggly line on `printStatus(bob);`:
+
+```java
+class Game {
+    public static void main(String[] args) {
+        Player bob = new Player(100);
+        printStatus(bob);
+    }
+
+    void printStatus(Player p) {
+        System.out.println("health: " + p.getHealth());
+    }
+}
+```
+
+What's the fix?
+"""
+prompt.distractors = [
+  "Make `printStatus` `private`",
+  "Move `printStatus` above `main`",
+  "Change `printStatus(bob);` to `bob.printStatus();`",
+]
+answer.answer = "Make `printStatus` `static`, like `main`"
+context = """
+`main` is `static`, so there's no `Game` object for it to call `printStatus` on. Making `printStatus` `static` too means it belongs to the class, so `main` can call it.
+`bob.printStatus()` doesn't work either, because `printStatus` is in `Game`, not in `Player`.
+"""
+id = "da5d0e9f-9ffd-4751-a899-2a785eb3aac6"

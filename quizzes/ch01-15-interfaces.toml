@@ -1,0 +1,82 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Which of these is the right way to write a method in an interface?
+"""
+prompt.distractors = [
+  "`void takeDamage(int amount) { }`",
+  "`void takeDamage(int amount) { health = health - amount; }`",
+  "`takeDamage(int amount);`",
+]
+answer.answer = "`void takeDamage(int amount);`"
+context = """
+A method in an interface is just its first line, with a `;` at the end and no `{ }`. The interface only says that the method exists. Each class that implements the interface writes the code inside it.
+"""
+id = "4cc9f905-89f6-4bee-b88b-29a91041bb92"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Here's an interface, and a class that implements it:
+
+```java
+interface Damageable {
+    void takeDamage(int amount);
+
+    int getHealth();
+}
+
+class Barrel implements Damageable {
+    private int health;
+
+    @Override
+    public void takeDamage(int amount) {
+        health = Math.max(health - amount, 0);
+    }
+}
+```
+
+What happens?
+"""
+prompt.distractors = [
+  "It works, and `getHealth` gives back 0",
+  "It works, until something calls `getHealth`, and then it crashes",
+  "It works, because `Barrel` only has to have one of the methods",
+]
+answer.answer = "`class Barrel` gets a red squiggly line, because it promised to have `getHealth` and doesn't"
+context = """
+`implements Damageable` is a promise to have *every* method that `Damageable` lists. Java checks that promise before the program even runs, so you get a red squiggly line saying `Barrel` must implement `getHealth`.
+"""
+id = "d6e1d165-7065-40df-8795-43e8f8cab3cd"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Why didn't we write `class Crate extends Player`, so that players could attack crates?
+"""
+prompt.distractors = [
+  "A class can't extend a class with a constructor",
+  "`Player` already has too many child classes",
+  "There's no reason. It would have worked just as well",
+]
+answer.answer = "A `Crate` would get everything a `Player` has, so crates could move, heal, and attack"
+context = """
+`extends` means "is a kind of." A crate isn't a kind of player. It just has something in common with players: it can take damage. An interface lets us say exactly that, without giving `Crate` anything else.
+"""
+id = "1ee6951b-0d4e-49be-baaa-d070aa6d7db6"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Which of these lines gets a red squiggly line?
+"""
+prompt.distractors = [
+  "`Damageable thing = new Crate();`",
+  "`Damageable thing = new Tank(100);`",
+  "`Crate crate = new Crate();`",
+]
+answer.answer = "`Damageable thing = new Damageable();`"
+context = """
+An interface's methods have no code in them, so you can't make an object from an interface by itself. You can only make objects of classes that implement it, like `Crate` or `Player`, and then put them in a `Damageable` variable. A `Tank` is a `Player`, and `Player` implements `Damageable`, so a `Tank` is `Damageable` too.
+"""
+id = "5d42678e-f8a1-4c60-a040-17b8c780fc88"

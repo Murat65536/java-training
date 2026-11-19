@@ -1,0 +1,132 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Here are two classes:
+
+```java
+class Player {
+    int health;
+
+    Player(int startingHealth) {
+        health = startingHealth;
+    }
+
+    void takeDamage(int amount) {
+        health = health - amount;
+    }
+}
+
+class Tank extends Player {
+    Tank(int startingHealth) {
+        super(startingHealth);
+    }
+
+    @Override
+    void takeDamage(int amount) {
+        if (amount > 5) {
+            super.takeDamage(amount - 5);
+        }
+    }
+}
+```
+
+What is `tom.health` after this code runs?
+
+```java
+Tank tom = new Tank(100);
+tom.takeDamage(20);
+tom.takeDamage(4);
+```
+"""
+prompt.distractors = ["76", "80", "71"]
+answer.answer = "85"
+context = """
+`tom` is a `Tank`, so `Tank`'s `takeDamage` runs. The 20 damage hit becomes 15. The 4 damage hit is 5 or less, so it doesn't do anything.
+"""
+id = "a3a55fb0-b0da-4456-8505-e418c1d7d9ef"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Here are two classes:
+
+```java
+class Player {
+    int health;
+
+    Player(int startingHealth) {
+        health = startingHealth;
+    }
+
+    void takeDamage(int amount) {
+        health = health - amount;
+    }
+
+    void attack(Player target) {
+        target.takeDamage(10);
+    }
+}
+
+class Tank extends Player {
+    Tank(int startingHealth) {
+        super(startingHealth);
+    }
+
+    @Override
+    void takeDamage(int amount) {
+        super.takeDamage(amount - 5);
+    }
+}
+```
+
+What is `tom.health` after this code runs?
+
+```java
+Player bob = new Player(100);
+Tank tom = new Tank(100);
+bob.attack(tom);
+```
+"""
+prompt.distractors = [
+  "90, because `attack` was written in `Player`",
+  "100",
+  "It's an error, because `attack` needs a `Player`, not a `Tank`",
+]
+answer.answer = "95"
+context = """
+A `Tank` is a `Player`, so you can attack one. Inside `attack`, `target` is `tom`, and `tom` is a `Tank`, so `Tank`'s version of `takeDamage` runs. Java always uses the version that belongs to the actual object.
+"""
+id = "ce085878-e4f6-4e6d-a483-65d8e775e396"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "What does writing `@Override` above a method do?"
+prompt.distractors = [
+  "Without it, the method can't replace the parent's version",
+  "It makes the parent's version run first",
+  "It stops child classes from changing the method",
+]
+answer.answer = "It asks Java to check that the method really replaces one from the parent class"
+context = """
+The method replaces the parent's version either way. `@Override` is a safety check: if you made a typo in the name, you get a red squiggly line instead of a brand new method that never gets called.
+"""
+id = "e15db161-e6ce-4edd-84e2-b9044d25c9f4"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Inside `Tank`, which version of `takeDamage` does this line call?
+
+```java
+super.takeDamage(amount - 5);
+```
+"""
+prompt.distractors = [
+  "`Tank`'s own `takeDamage`",
+  "Whichever one was written first",
+]
+answer.answer = "`Player`'s version of `takeDamage`"
+context = """
+`super.` means "my parent's version." Without the `super.`, `takeDamage(...)` would call `Tank`'s own version, which would call itself forever and crash with a `StackOverflowError`.
+"""
+id = "9342c701-4fa6-441b-849d-8236998ca084"

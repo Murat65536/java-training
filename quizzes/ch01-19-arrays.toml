@@ -1,0 +1,75 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Here's an array:
+
+```java
+Player[] team = {bob, alice, carl};
+```
+
+Which `Player` is `team[1]`?
+"""
+prompt.distractors = ["`bob`", "`carl`", "It's an error, because there's no `team[1]`"]
+answer.answer = "`alice`"
+context = """
+Indexes start at 0, so `team[0]` is `bob`, `team[1]` is `alice`, and `team[2]` is `carl`.
+"""
+id = "991f8a94-5992-442b-bfd0-b9a859b1525d"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+`team` has 3 players in it. What happens here?
+
+```java
+System.out.println(team[team.length].getHealth());
+```
+"""
+prompt.distractors = [
+  "It prints the last player's health",
+  "It prints `0`",
+  "It prints `null`",
+]
+answer.answer = "It crashes with an `ArrayIndexOutOfBoundsException`"
+context = """
+`team.length` is 3, but the indexes only go 0, 1, 2. The last one is always `length - 1`. Asking for index 3 is one past the end, so the program crashes.
+"""
+id = "136eae08-fc28-452c-b3d6-d4c614dee07b"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+How do you read this loop?
+
+```java
+for (Player player : team) {
+    player.heal(Constants.HEALER_HEAL_AMOUNT);
+}
+```
+"""
+prompt.distractors = [
+  "Heal `team`, using `player`",
+  "Heal `player` as many times as there are players in `team`",
+  "Heal only the first `Player` in `team`",
+]
+answer.answer = "For each `Player` in `team`, call it `player`, and heal it"
+context = """
+A for-each loop goes through every item, one at a time. Each time around, `player` is the next `Player` in `team`, so every player on the team gets healed once.
+"""
+id = "96e66866-bc5a-4612-bfdc-d1dfe869afbb"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+In `public static void main(String[] args)`, what is `args`?
+"""
+prompt.distractors = [
+  "The name of the program",
+  "A list of every class in the file",
+  "Nothing. It's just a word Java needs there",
+]
+answer.answer = "An array of `String`s, holding any extra words the program was started with"
+context = """
+`String[]` means an array of `String`s. If you run `java Game.java hello` from the terminal, `args[0]` is `"hello"`. VS Code's **Run** button doesn't pass any, so `args.length` is 0.
+"""
+id = "d0474827-f43f-4228-9369-814032528fff"

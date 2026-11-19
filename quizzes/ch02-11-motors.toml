@@ -1,0 +1,63 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Two SPARK MAX motor controllers on the robot both have CAN ID 5. What happens?
+"""
+prompt.distractors = [
+  "Nothing, as long as they're plugged into different motors",
+  "They automatically pick new IDs",
+  "Both of them do whatever the code tells motor 5, which is what you want",
+]
+answer.answer = "Neither one works right, because messages for ID 5 can't tell them apart"
+context = """
+Every device on the CAN bus shares the same wires, so the ID is the only way to say which SPARK MAX a message is for. Every device of the same kind needs its own.
+"""
+id = "603150c5-b639-4a0e-9c74-b599d9d700de"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Which idle mode should an arm's motor use, and why?
+"""
+prompt.distractors = [
+  "Coast, so the arm can swing freely",
+  "Coast, so the motor doesn't get hot",
+  "It doesn't matter for arms",
+]
+answer.answer = "Brake, so the motor resists turning and the arm stays put when it's told 0 volts"
+context = """
+In brake mode, a stopped motor resists being turned, which helps hold the arm in place. Coast mode is for things that should spin down on their own, like flywheels.
+"""
+id = "0d039586-60ff-4822-8d30-4c8f6cbf0cd2"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+The arm uses a relative encoder, and the code thinks 0 degrees is `STOWED`. The robot gets turned on with the arm sticking straight out, at 90 degrees. What does the code think the arm's angle is?
+"""
+prompt.distractors = [
+  "90 degrees",
+  "It can't tell, so it crashes",
+  "180 degrees",
+]
+answer.answer = "0 degrees, so every angle will be 90 degrees off"
+context = """
+A relative encoder starts at 0 when the robot turns on, wherever the mechanism is. That's why mechanisms with relative encoders have to be in their starting position when the robot is turned on.
+"""
+id = "651f6475-6b7f-4007-90b5-0bb0e341e300"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+You're about to enable brand-new arm code on the real robot for the first time. What should `MAX_VOLTAGE` be?
+"""
+prompt.distractors = [
+  "The same as in the simulator, since the code already works there",
+  "12, so you can see if the motor works at all",
+  "0, so nothing can move",
+]
+answer.answer = "Much lower than normal, like 1 or 2 volts"
+context = """
+The simulator can't catch everything, like a motor that's inverted or a wrong CAN ID. Starting slow means that if something is wrong, it goes wrong slowly, and you have time to disable the robot.
+"""
+id = "f7aec16d-26be-4ae5-b7bc-121f44d6f925"

@@ -1,0 +1,72 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Why do we write `static` in `public static final int ARENA_SIZE = 100;`?
+"""
+prompt.distractors = [
+  "Without `static`, the value could change",
+  "Only `static` fields can hold numbers",
+  "`static` makes it `private`",
+]
+answer.answer = "Every `Player` uses the same arena, so there only needs to be one copy of the number"
+context = """
+Without `static`, every `Player` would carry around their own copy of the same 100. `static` means there's just one, belonging to the class.
+It's `final` that stops the value from changing.
+"""
+id = "473d1296-e0af-4f85-a60f-db1f5f2384fa"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+In the last lesson, we said fields should be `private`. Why is it OK for `ARENA_SIZE` to be `public`?
+"""
+prompt.distractors = [
+  "Because `static` fields can't be `private`",
+  "It isn't OK. Every field should always be `private`",
+  "Because it's in ALL CAPS",
+]
+answer.answer = "Because it's `final`, so nobody can change it anyway"
+context = """
+We made fields `private` so that nobody could change them without going through our methods. A `final` field can't be changed by anyone, so letting other code read it is safe.
+"""
+id = "a5d17dc3-ae00-4df4-b8ff-982b6db4724d"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Here's a class:
+
+```java
+class Constants {
+    public static final int ARENA_SIZE = 100;
+}
+```
+
+Which line gets a red squiggly line?
+"""
+prompt.distractors = [
+  "`int edge = Constants.ARENA_SIZE;`",
+  "`System.out.println(Constants.ARENA_SIZE);`",
+  "`boolean outside = x > Constants.ARENA_SIZE;`",
+]
+answer.answer = "`Constants.ARENA_SIZE = 200;`"
+context = """
+`ARENA_SIZE` is `final`, so it can never be changed. Reading it is always fine. To make the arena bigger, you change the `100` in `Constants` itself, and run the program again.
+"""
+id = "7cfd7e9c-5a7f-490c-a13b-decedd24988a"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Your robot's arm code uses `ArmConstants.MOTOR_ID` everywhere it needs the arm motor's ID. Then someone rewires the robot, and the arm motor's ID changes from 5 to 7. What do you need to change in the code?
+"""
+prompt.distractors = [
+  "Every place the number 5 shows up in the code",
+  "Every place `ArmConstants.MOTOR_ID` shows up in the code",
+  "Nothing, because the robot figures out the new ID by itself",
+]
+answer.answer = "Just the one line in `ArmConstants` that sets `MOTOR_ID`"
+context = """
+A constant means the number is written in one place, and everything else uses its name. Change that one line, and everything that uses `ArmConstants.MOTOR_ID` gets the new ID.
+"""
+id = "9ffb8c18-5e0f-4864-a8c7-d44ffd5665f2"

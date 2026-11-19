@@ -1,0 +1,72 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What's the difference between an `if` and a `while`?
+"""
+prompt.distractors = [
+  "A `while` doesn't need a question in its `()`",
+  "An `if` can only check numbers, but a `while` can check anything",
+  "There's no difference, they're two names for the same thing",
+]
+answer.answer = "After running its code, a `while` goes back and asks its question again"
+context = """
+Both check their question, and run their code if it's `true`. An `if` is done after that. A `while` keeps asking again and running its code again, until the answer is `false`.
+"""
+id = "931ffcb5-5103-4cad-abb8-c456752a6528"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+How many times does this print `Hi`?
+
+```java
+for (int i = 0; i < 4; i++) {
+    System.out.println("Hi");
+}
+```
+"""
+prompt.distractors = ["3", "5", "It keeps printing forever"]
+answer.answer = "4"
+context = """
+`i` goes 0, 1, 2, 3. When it gets to 4, `i < 4` is `false`, so the loop stops. That's 4 iterations.
+"""
+id = "0f50f70e-72dc-4923-8509-4135a20f563c"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+`x` starts at 0. What is `x` after this line runs?
+
+```java
+x++;
+```
+"""
+prompt.distractors = ["0", "2", "It's an error, because `++` only works in a `for` loop"]
+answer.answer = "1"
+context = """
+`x++` is a shortcut for `x = x + 1`. It works anywhere, not just in loops.
+"""
+id = "060ff786-1311-4741-a13d-51de29f3abbc"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What happens when this runs?
+
+```java
+int countdown = 3;
+while (countdown > 0) {
+    System.out.println(countdown);
+}
+```
+"""
+prompt.distractors = [
+  "It prints 3, 2, and 1",
+  "It prints 3 once",
+  "It doesn't print anything, because `countdown` isn't 0",
+]
+answer.answer = "It prints 3 forever, because `countdown` never changes"
+context = """
+Nothing inside the loop changes `countdown`, so `countdown > 0` is `true` every time, and the loop never stops. To fix it, add `countdown--;` inside the loop. Then it would print 3, 2, and 1. If a program ever gets stuck like this, click in the terminal and press Ctrl+C.
+"""
+id = "f1f15917-7451-483d-86da-97d4eb3bb246"

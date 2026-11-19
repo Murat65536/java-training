@@ -1,0 +1,74 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Which loop fits best for "keep attacking until the crate breaks"?
+"""
+prompt.distractors = [
+  "A `for` loop, because it's shorter",
+  "A `for` loop that goes around exactly 40 times",
+  "Neither, because loops can't call methods",
+]
+answer.answer = "A `while` loop, because we don't know ahead of time how many attacks it'll take"
+context = """
+`for` loops are for when you know how many times to go around before you start. Here, it depends on the weapon, the crate, and the stance, so `while (crate.getHealth() > 0)` says exactly what we mean.
+"""
+id = "294b7581-d386-4416-93e0-00f329d5af87"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What's wrong with this robot code?
+
+```java
+public Command raiseToScoring() {
+    return run(coroutine -> {
+        while (getAngle() < ArmPosition.SCORING.getAngleDegrees()) {
+            setSpeed(ArmConstants.MAX_SPEED);
+        }
+        setSpeed(0);
+    }).named("Arm.RaiseToScoring");
+}
+```
+"""
+prompt.distractors = [
+  "Nothing, this is the right way to move an arm",
+  "`while` loops don't work on a robot",
+  "It should be a `for` loop",
+]
+answer.answer = "While it's waiting for the arm, nothing else on the robot runs, including driving"
+context = """
+Robot code does one thing at a time. As long as this loop is going without stepping aside, nothing else gets a turn: not the drivetrain, not the driver's controller, not any other command. If the arm is jammed and never gets there, the robot is stuck forever. (WPILib catches this one for you: the code won't build until the loop calls `coroutine.yield()`.)
+"""
+id = "865c78c1-d5c2-427e-90ea-20a925124abf"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+How do you fix the loop in that command?
+"""
+prompt.distractors = [
+  "Use a `for` loop instead of a `while` loop",
+  "Make the motor faster, so the loop finishes sooner",
+  "Move `setSpeed(0)` inside the loop",
+]
+answer.answer = "Call `coroutine.yield()` inside the loop, so the rest of the robot gets a turn each time around"
+context = """
+`coroutine.yield()` means "that's all for now, come back to me next time." Each time around, the command checks the arm and sets its speed, then lets everything else run. About 20 milliseconds later, the loop picks up where it left off. A faster motor wouldn't help: the robot would still be stuck until the arm got there.
+"""
+id = "8e9360d0-8bb3-418d-9651-652d89558d00"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Which of these loops in robot code *doesn't* need to call `coroutine.yield()`?
+"""
+prompt.distractors = [
+  "A loop that keeps raising the arm until it reaches a position",
+  "A loop that waits until a game piece is in the intake",
+  "A loop that keeps spinning a motor until a button is let go",
+]
+answer.answer = "A loop that goes through a list of motors and stops each one"
+context = """
+Going through a list finishes right away, so it never holds up the rest of the robot. The other three are all *waiting* for something to happen, which could take a long time, so they have to yield every time around.
+"""
+id = "7749f214-e159-4214-9a4c-71e9b3ccbaff"

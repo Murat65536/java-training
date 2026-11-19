@@ -1,0 +1,66 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Here's a class:
+
+```java
+class Player {
+    int health;
+}
+```
+
+What is `alice.health` after this code runs?
+
+```java
+Player bob = new Player();
+Player alice = new Player();
+bob.health = 80;
+alice.health = 20;
+bob.health = 50;
+```
+"""
+prompt.distractors = ["50", "80", "0"]
+answer.answer = "20"
+context = """
+Each `Player` has its own `health`. Changing `bob.health` to 50 doesn't touch `alice.health`, which is still 20.
+"""
+id = "b127e508-a3e3-4337-a929-163d62ee493f"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Here's a class:
+
+```java
+class Player {
+    int health;
+}
+```
+
+What is `p.health` after this code runs?
+
+```java
+Player p = new Player();
+```
+"""
+prompt.distractors = ["100", "Nothing, it's empty", "It's an error"]
+answer.answer = "0"
+context = """
+If you never set a number field, it starts out at `0`.
+"""
+id = "f8122dd1-fe7f-422a-885b-91859d93287b"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Which line puts `bob`'s health into a new variable named `h`?"
+prompt.distractors = [
+  "`int h = Player.health;`",
+  "`int h = health.bob;`",
+  "`int h = bob health;`",
+]
+answer.answer = "`int h = bob.health;`"
+context = """
+The object goes first, then `.`, then the field: `bob.health`.
+`Player.health` doesn't work, because `Player` is the blueprint. The blueprint doesn't have a health, only the `Player`s you build from it do.
+"""
+id = "77d6c245-52c4-4512-bf57-274057ee5613"

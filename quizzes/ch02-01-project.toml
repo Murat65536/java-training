@@ -1,0 +1,63 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+A file is in the folder `frc/robot/mechanisms`. What should its first line be?
+"""
+prompt.distractors = [
+  "`package frc.robot;`",
+  "`import frc.robot.mechanisms;`",
+  "`package mechanisms;`",
+]
+answer.answer = "`package frc.robot.mechanisms;`"
+context = """
+A package is a folder, and every file says which package it's in on its first line. The package has to match the whole folder path, with `.` instead of `/`.
+"""
+id = "e85d3379-1b4c-4eda-9a91-d24a5bd34732"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What does `Scheduler.getDefault().run()` in `robotPeriodic()` do?
+"""
+prompt.distractors = [
+  "It starts every command in the robot program, once",
+  "It makes the robot run faster",
+  "It runs `Main.java` again",
+]
+answer.answer = "It gives every command that's running one turn, until each one calls `coroutine.yield()` or finishes"
+context = """
+WPILib calls `robotPeriodic()` about 50 times a second, and each time, the scheduler gives each running command one turn. That's why a command's loop has to call `coroutine.yield()`: it's how the command gives its turn back.
+"""
+id = "046a350f-f7c3-4387-acfd-e07d19b6ca8b"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What does `@Teleop` above a class do?
+"""
+prompt.distractors = [
+  "It makes the class run as soon as the robot turns on",
+  "It's a comment, so Java ignores it",
+  "It makes every method in the class `public`",
+]
+answer.answer = "It tells WPILib to add the class to the list of teleop opmodes the drivers can pick from"
+context = """
+`@Teleop` is an annotation: a label for WPILib, like `@Override` is a label for Java. WPILib finds every class labeled `@Teleop` or `@Autonomous` and lists them in the Driver Station, so you never have to make the list yourself.
+"""
+id = "9d9a63c5-6f2a-4ebc-8aee-0aabe33234b9"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What happens if you forget `.named(...)` at the end of a command?
+"""
+prompt.distractors = [
+  "The command gets named `Command`",
+  "The command runs, but can't be bound to a button",
+  "Nothing. Names are just for decoration",
+]
+answer.answer = "Your code won't build, because every command needs a name"
+context = """
+WPILib checks that every command gets a name before your code even runs. The names show up in the robot's logs and dashboards, so you can always tell what the robot is doing, and why.
+"""
+id = "afbc706e-9778-4aba-b381-41cc50cff8f3"

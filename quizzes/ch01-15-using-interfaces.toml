@@ -1,0 +1,88 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+`Player` implements `Damageable`, which has `takeDamage` and `getHealth`. What happens here?
+
+```java
+Damageable thing = new Player(100);
+thing.move(5);
+```
+"""
+prompt.distractors = [
+  "It works, because `thing` is really a `Player`",
+  "It crashes when it runs",
+  "It works, but `move` doesn't do anything",
+]
+answer.answer = "`thing.move(5)` gets a red squiggly line, because `Damageable` doesn't promise a `move` method"
+context = """
+`thing` could be holding any `Damageable`, including a `Crate`, which can't move. So Java only lets you use the methods that `Damageable` promises, even when the object really is a `Player`.
+"""
+id = "9a4a0da6-ec8d-4129-8044-e15a1720fd6a"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Which of these class declarations gets a red squiggly line?
+"""
+prompt.distractors = [
+  "`class Player implements Damageable, Healable {`",
+  "`class Tank extends Player implements Saveable {`",
+  "`class Crate implements Damageable {`",
+]
+answer.answer = "`class Healer extends Player, Tank {`"
+context = """
+A class can only extend *one* class. But it can implement as many interfaces as it wants, with commas between them, and it can extend a class and implement interfaces at the same time.
+"""
+id = "e632c420-f265-4b0c-96e7-7fd18d77776e"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+`attack` was changed to `attack(Damageable target)`, but `Berserker` still has this:
+
+```java
+@Override
+public void attack(Player target) {
+    super.attack(target);
+    if (isInDanger()) {
+        super.attack(target);
+    }
+}
+```
+
+What happens?
+"""
+prompt.distractors = [
+  "It works the same as before",
+  "It works, but `Berserker`s can only attack players now",
+  "It crashes the first time a `Berserker` attacks",
+]
+answer.answer = "A red squiggly line, because this `attack` doesn't replace `Player`'s anymore"
+context = """
+`attack(Player target)` and `attack(Damageable target)` take different parameters, so they're different methods. This one doesn't replace `Player`'s `attack` anymore. `@Override` catches that, so you get a red squiggly line. Without `@Override`, it would stop working with no warning, which is why you should always write it.
+"""
+id = "a02f9bcd-4479-4bac-bbed-57872623313e"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Here's the constructor for the robot's arm:
+
+```java
+public Arm(ArmIO armIO) {
+    io = armIO;
+}
+```
+
+`RealArmIO` and `SimArmIO` both implement `ArmIO`. Which of these can you make?
+"""
+prompt.distractors = [
+  "Only `new Arm(new RealArmIO())`",
+  "Only `new Arm(new SimArmIO())`",
+  "Neither, because you have to pass in an `ArmIO`",
+]
+answer.answer = "Both `new Arm(new RealArmIO())` and `new Arm(new SimArmIO())`"
+context = """
+The constructor takes an `ArmIO`, so it works with anything that implements `ArmIO`. That way the same `Arm` code can run with the real hardware on the robot, or with a pretend arm in the simulator.
+"""
+id = "b24bf934-30b4-4106-b1a0-e4b0825d51f3"

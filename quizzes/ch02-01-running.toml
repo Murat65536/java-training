@@ -1,0 +1,47 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+You start the simulator and press the right stick, but nothing prints. The Sim GUI's Robot State says **Disabled**. What's wrong?
+"""
+prompt.distractors = [
+  "The simulator can't run commands",
+  "The right stick only works on a real robot",
+  "`exampleCommand` needs to call `coroutine.yield()` more often",
+]
+answer.answer = "Commands only run while the robot is enabled, so you need to pick Teleoperated first"
+context = """
+A disabled robot doesn't run its commands, just like a real robot can't move while it's disabled. Pick **Teleoperated** in Robot State, choose the opmode, and then press the stick.
+"""
+id = "51462775-4d3e-42e9-b3ca-437b903b1332"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+`exampleCommand` is bound with `whileTrue`. What happens when the driver lets go of the right stick?
+"""
+prompt.distractors = [
+  "The command keeps running until the robot is disabled",
+  "The command finishes its current loop, then runs one more time",
+  "Nothing, because `exampleCommand` never finishes on its own",
+]
+answer.answer = "The command gets canceled, so it stops printing"
+context = """
+`whileTrue` starts the command when the trigger becomes true, and cancels it as soon as the trigger is false again. That's how a command that loops forever still stops when you let go.
+"""
+id = "cd4be26a-484e-4467-b21f-a1da47f631de"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Why did we check **Enable Desktop Support** when making the project?
+"""
+prompt.distractors = [
+  "So the project shows up on your laptop's desktop",
+  "So you can use the keyboard to type code",
+  "It doesn't matter, it's just a setting",
+]
+answer.answer = "It lets the robot code run on your laptop, in the simulator"
+context = """
+Normally, robot code only runs on the robot. Desktop support lets it run on your laptop too, which is what the simulator needs.
+"""
+id = "448a0254-47c1-45b7-88bd-99d5c914867f"

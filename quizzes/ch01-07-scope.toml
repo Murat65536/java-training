@@ -1,0 +1,40 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Which line gets a red squiggly line?
+
+```java
+int score = 10;
+if (score > 5) {
+    int extra = 3;
+    score = score + extra;
+}
+System.out.println(score + extra);
+```
+"""
+prompt.distractors = [
+  "`int extra = 3;`",
+  "`score = score + extra;`",
+  "None of them. The code works",
+]
+answer.answer = "`System.out.println(score + extra);`"
+context = """
+`extra` was made inside the if statement's `{` `}`, so it stops existing at the `}`. The last line is outside, so it can't use `extra`. `score` was made outside, so it's fine.
+"""
+id = "8c56a003-2ed9-432b-a5a2-78c72597e875"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+`takeDamage` and `heal` both have a parameter named `amount`. What happens?
+"""
+prompt.distractors = [
+  "A red squiggly line, because two variables can't have the same name",
+  "Calling `heal(5)` also changes `takeDamage`'s `amount`",
+  "Only the method written first gets to use the name",
+]
+answer.answer = "Nothing goes wrong. Each `amount` only exists inside its own method"
+context = """
+A parameter's scope is the method it belongs to. The two `amount`s never exist in the same place, so Java never mixes them up.
+"""
+id = "d09c2930-9886-4bfd-9194-645efb501bf4"

@@ -1,0 +1,75 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+This method should say when the arm has reached `targetAngle`. What's wrong with it?
+
+```java
+public boolean isAtAngle(double targetAngle) {
+    return getAngle() == targetAngle;
+}
+```
+"""
+prompt.distractors = [
+  "Nothing, it works fine",
+  "It gets a red squiggly line, because `==` doesn't work on `double`s",
+  "It crashes, because `45.0` isn't a whole number",
+]
+answer.answer = "The arm will almost never be at *exactly* `targetAngle`, so it will almost never give back `true`"
+context = """
+If `targetAngle` is 45, a real arm will be at something like 44.97 or 45.02, not exactly 45.0. Decimals in a computer can be a tiny bit off, too. So instead of `==`, check if it's close enough: `Math.abs(getAngle() - targetAngle) < ArmConstants.TOLERANCE_DEGREES`.
+"""
+id = "8c1d0a7e-fc44-40d6-b6ae-0b16249f7b40"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Why is there a `Math.abs` in this check?
+
+```java
+return Math.abs(getAngle() - targetAngle) < ArmConstants.TOLERANCE_DEGREES;
+```
+"""
+prompt.distractors = [
+  "`Math.abs` rounds the angle to the closest whole number",
+  "Without it, you get a red squiggly line",
+  "`Math.abs` turns the angle into a `double`",
+]
+answer.answer = "So it works whether the arm is a little below `targetAngle` or a little above it"
+context = """
+If `targetAngle` is 45 and the arm is at 44.8, `getAngle() - targetAngle` is `-0.2`. Without `Math.abs`, any negative number is less than the tolerance, so even an arm way down at 0 would count. `Math.abs` takes away the minus sign, so you get how far off the arm is, no matter which side it's on.
+"""
+id = "762df527-f83f-4161-8aa6-be6d28b8144c"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+The arm's motor turns 25 times for every 1 turn of the arm. What is `GEAR_RATIO`?
+
+```java
+public static final double GEAR_RATIO = 1 / 25;
+```
+"""
+prompt.distractors = ["0.04", "25.0", "It's an error, because `1 / 25` isn't a whole number"]
+answer.answer = "0.0"
+context = """
+`1` and `25` are both `int`s, so this is integer division. `0.04` gets chopped down to `0`, and then stored as `0.0`. There's no red squiggly line, so this bug is easy to miss. (In a robot project, WPILib's build catches this simple case, but not every case.) It should be `1.0 / 25`.
+"""
+id = "9b8a0994-11af-45a8-8468-19f55f9cd761"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+`ArmConstants.MAX_SPEED` is `0.5`. Something calls `setSpeed(0.8)`. What speed does the motor get?
+
+```java
+public void setSpeed(double speed) {
+    motor.setThrottle(Math.max(-ArmConstants.MAX_SPEED, Math.min(speed, ArmConstants.MAX_SPEED)));
+}
+```
+"""
+prompt.distractors = ["0.8", "-0.5", "0.0"]
+answer.answer = "0.5"
+context = """
+Read it from the inside out. `Math.min(0.8, 0.5)` is `0.5`. Then `Math.max(-0.5, 0.5)` is still `0.5`. The speed got clamped down to the arm's top speed.
+"""
+id = "7184fa4c-ce76-4e34-b48e-fb084be75973"

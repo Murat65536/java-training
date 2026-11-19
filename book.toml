@@ -1,0 +1,28 @@
+[book]
+title = "Java Training"
+language = "en"
+
+[build]
+# Without this, mdBook quietly makes an empty page for any chapter in SUMMARY.md that doesn't exist yet.
+create-missing = false
+# Rebuild the live preview when quiz or code files change too, not just files in src/
+extra-watch-dirs = ["quizzes", "code", "tools"]
+
+[preprocessor.quiz]
+default_language = "java"
+cache_answers = true
+# Quizzes cover the whole page while they're being taken, so students answer from memory.
+# Closing one early with the ✕ throws away the answers so far.
+fullscreen = true
+
+# Replaces {{#listing ch01-XX}} and {{#solution ch01-XX}} with code from code/, hiding what didn't change.
+[preprocessor.listing]
+command = "python3 tools/listing_preprocessor.py"
+
+[output.html]
+# The copy button copies hidden lines too, so copying a listing always gets the whole program.
+additional-js = ["theme/copy-full-code.js"]
+
+# Lines starting with ~ in a Java code block are hidden until you click the eye button.
+[output.html.code.hidelines]
+java = "~"

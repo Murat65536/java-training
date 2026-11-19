@@ -1,0 +1,13 @@
+// Hosts the built book at book.muratbayraktar.dev.
+// Deploy with: mdbook build && npx wrangler deploy
+{
+  "name": "java-training",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": "./book",
+    "not_found_handling": "404-page"
+  },
+  "routes": [
+    { "pattern": "book.muratbayraktar.dev", "custom_domain": true }
+  ]
+}

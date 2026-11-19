@@ -1,0 +1,31 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Why does real robot code usually tell motors a voltage, instead of a throttle?
+"""
+prompt.distractors = [
+  "Motors can't take a throttle at all",
+  "Voltages can go higher than 1, so the motor goes faster",
+  "Throttles only work in the simulator",
+]
+answer.answer = "The battery's voltage drops during a match, so the same throttle gives different amounts of push"
+context = """
+A throttle is a fraction of whatever the battery has right now. Telling the motor controller a voltage lets it work out the right throttle for the battery's current voltage, so the mechanism acts the same at the end of a match as at the start.
+"""
+id = "a3b0aec7-0081-4532-ba55-1d6a648e7358"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What does `KG` stand for in `ArmFeedforward`?
+"""
+prompt.distractors = [
+  "How many volts it takes to get past friction",
+  "How many extra volts it takes for each bit of speed",
+  "The arm's gear ratio",
+]
+answer.answer = "How many volts it takes to hold the arm up against gravity when it's level"
+context = """
+`KS` is for friction, `KV` is for speed, and `KG` is for gravity. `ArmFeedforward` multiplies `KG` by the cosine of the angle, because gravity pulls hardest when the arm is level.
+"""
+id = "b3ab443d-e520-4320-926b-ea968bd8dd95"

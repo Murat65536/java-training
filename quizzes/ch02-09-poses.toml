@@ -1,0 +1,31 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+A robot's pose is `new Pose2d(Meters.of(5), Meters.of(1), new Rotation2d(Degrees.of(180)))`. Where is it, and which way is it facing?
+"""
+prompt.distractors = [
+  "5 meters to the left of the origin, 1 meter out from the blue wall, facing the red wall",
+  "1 meter out from the blue wall, facing left",
+  "5 meters out from the blue wall, 1 meter to the left of the origin, facing the red wall",
+]
+answer.answer = "5 meters out from the blue wall, 1 meter to the left of the origin, facing back toward the blue wall"
+context = """
+x is how far out from the blue wall, and y is how far to the left. 0 degrees faces the red wall, so 180 degrees faces the opposite way, back toward blue.
+"""
+id = "2a227dca-9d9b-4ac7-8949-754787aef3da"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+The robot is facing the blue wall, and it's told to drive at 1 meter per second in the x direction, **field-relative**. Which way does it go?
+"""
+prompt.distractors = [
+  "Toward the blue wall, the way it's facing",
+  "To its left",
+  "It spins around first, then drives",
+]
+answer.answer = "Toward the red wall, backing up"
+context = """
+Field-relative directions don't care which way the robot is facing. Field x is always toward the red wall. Since this robot is facing the other way, it goes backward to get there.
+"""
+id = "43e80158-f822-4dde-97ac-4b8e6af11be0"

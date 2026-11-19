@@ -1,0 +1,37 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What does this print?
+
+```java
+Player bob = new Player(100);
+Player carl = new Player(100);
+System.out.println(bob == carl);
+```
+"""
+prompt.distractors = [
+  "`true`, because they both have 100 health",
+  "Nothing, because you can't use `==` on objects",
+  "`100`",
+]
+answer.answer = "`false`"
+context = """
+There are two `new`s, so there are two separate `Player`s. For objects, `==` asks whether two variables hold the same address, and these don't, even though the `Player`s look exactly alike.
+"""
+id = "8cc5bcf1-dba4-4e0e-b0ca-8fc9ba4c9545"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+`name` is a `String` that the player typed in. What's the right way to check whether it's `"Bob"`?
+"""
+prompt.distractors = [
+  "`name == \"Bob\"`",
+  "`name = \"Bob\"`",
+  "Either `name == \"Bob\"` or `name.equals(\"Bob\")`, since they always do the same thing",
+]
+answer.answer = "`name.equals(\"Bob\")`"
+context = """
+`equals` compares the letters. `==` only checks whether they're the same object, which might or might not be true even when the letters match. (And a single `=` doesn't compare at all. It sets `name`.)
+"""
+id = "579ed03f-e05a-47d3-8d18-548d3cf6ec3c"

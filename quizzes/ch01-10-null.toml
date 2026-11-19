@@ -1,0 +1,108 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Here's a class:
+
+```java
+class Player {
+    Weapon weapon;
+}
+```
+
+If you make a new `Player` and never set its `weapon`, what is its `weapon`?
+"""
+prompt.distractors = [
+  "A `Weapon` with 0 damage",
+  "`0`",
+  "It's an error to make a `Player` without setting `weapon`",
+]
+answer.answer = "`null`"
+context = """
+Fields that hold objects start out as `null`, which means "no object at all." Number fields start at `0`, and `boolean` fields start at `false`.
+"""
+id = "95944801-2832-41f1-9790-b803cfafd890"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Here are two classes:
+
+```java
+class Weapon {
+    int damage;
+}
+
+class Player {
+    Weapon weapon;
+}
+```
+
+`p` is a new `Player`, and its `weapon` was never set. Which of these lines crashes?
+"""
+prompt.distractors = [
+  "`System.out.println(p.weapon);`",
+  "`System.out.println(p.weapon == null);`",
+  "`p.weapon = new Weapon();`",
+]
+answer.answer = "`System.out.println(p.weapon.damage);`"
+context = """
+Looking *at* `null` is fine: printing `p.weapon` prints `null`, and `p.weapon == null` is `true`. Setting `p.weapon` is fine too.
+The crash only happens when you try to look *inside* `null`. `p.weapon.damage` asks for the damage of a weapon that doesn't exist.
+"""
+id = "d544803b-4315-40f9-bc03-3505d68fd997"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Here are two classes:
+
+```java
+class Weapon {
+    int damage;
+}
+
+class Player {
+    Weapon weapon;
+}
+```
+
+What is `alice.weapon.damage` after this code runs?
+
+```java
+Weapon sword = new Weapon();
+sword.damage = 25;
+Player bob = new Player();
+Player alice = new Player();
+bob.weapon = sword;
+alice.weapon = sword;
+bob.weapon.damage = 50;
+```
+"""
+prompt.distractors = ["25", "0", "It crashes"]
+answer.answer = "50"
+context = """
+There's only one `new Weapon()`, so there's only one weapon. `bob.weapon` and `alice.weapon` both hold its address, so changing it through `bob` changes it for `alice` too.
+"""
+id = "94357fc5-b954-46d7-b9aa-b8ff79aa8b8f"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Your code has no red squiggly lines, but when you click **Run**, you see:
+
+```
+Exception in thread "main" java.lang.NullPointerException
+```
+
+What does this mean?
+"""
+prompt.distractors = [
+  "You forgot a `;` somewhere",
+  "Java isn't installed correctly",
+  "One of your variables is set to the number 0",
+]
+answer.answer = "While it was running, your program tried to look inside something that was `null`"
+context = """
+A `NullPointerException` is a crash, which happens while the program runs. Mistakes like a missing `;` get a red squiggly line instead, before the program even starts. The rest of the message tells you which line it happened on.
+"""
+id = "e43dea7a-4788-4ad6-8e16-a7921b7d6b2c"

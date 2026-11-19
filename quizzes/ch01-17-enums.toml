@@ -1,0 +1,79 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Why is an enum better than a `String` for a `Player`'s stance?
+"""
+prompt.distractors = [
+  "Enums use less memory, so the game runs faster",
+  "A `String` can't be stored in a field",
+  "There's no difference, it's just a different way to write it",
+]
+answer.answer = "A typo or a made-up stance gets a red squiggly line, instead of doing the wrong thing with no warning"
+context = """
+Any text is a `String`, so `"defnding"` or `"sleeping"` would be allowed, and the code would just never match them. An enum lists *every* value it can ever have, so anything else is a red squiggly line.
+"""
+id = "8cd72bff-3ddd-4374-8cd5-55078e33f087"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What does this print?
+
+```java
+Player bob = new Player(100);
+bob.setStance(Stance.AGGRESSIVE);
+System.out.println(bob.getStance());
+```
+"""
+prompt.distractors = ["2", "Stance", "aggressive"]
+answer.answer = "AGGRESSIVE"
+context = """
+Printing an enum value prints its name, exactly the way it's written in the enum.
+"""
+id = "48639f8d-7663-4b7b-a6e2-fbe70c3efc20"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+`Stance` has three values: `NORMAL`, `DEFENDING`, and `AGGRESSIVE`. What's wrong with this?
+
+```java
+double multiplier = switch (stance) {
+    case NORMAL -> 1.0;
+    case DEFENDING -> Constants.DEFENDING_DAMAGE_MULTIPLIER;
+};
+```
+"""
+prompt.distractors = [
+  "Nothing. If `stance` is `AGGRESSIVE`, `multiplier` is 0",
+  "Nothing. If `stance` is `AGGRESSIVE`, `multiplier` is 1.0",
+  "It crashes if `stance` is `AGGRESSIVE`",
+]
+answer.answer = "It gets a red squiggly line, because it doesn't cover `AGGRESSIVE`"
+context = """
+A switch that gives back a value has to have an answer for every value. Java checks this before the program runs, so you can't forget one. That's also why adding a new value to an enum shows you every switch that needs updating.
+"""
+id = "b6e9a6cf-4a62-4184-942f-d619b6c4d6ed"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What does `attackBonus()` give back if `stance` is `DEFENDING`?
+
+```java
+return switch (stance) {
+    case AGGRESSIVE -> Constants.AGGRESSIVE_ATTACK_BONUS;
+    case NORMAL, DEFENDING -> 0;
+};
+```
+"""
+prompt.distractors = [
+  "`Constants.AGGRESSIVE_ATTACK_BONUS`",
+  "Nothing, because `DEFENDING` is the second value in that `case`",
+  "It's an error to put two values in one `case`",
+]
+answer.answer = "0"
+context = """
+A `case` with commas matches any of the values in it. So `case NORMAL, DEFENDING` matches both, and gives back `0` for either one.
+"""
+id = "bada172f-a039-4daf-bd4e-e25f895e8317"

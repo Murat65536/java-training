@@ -1,0 +1,67 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+The driver presses and immediately lets go of the button bound like this. What happens?
+
+```java
+robot.driverController.faceUp().onTrue(robot.arm.moveTo(ArmPosition.SCORING));
+```
+"""
+prompt.distractors = [
+  "The arm moves for as long as the button was held, then stops",
+  "Nothing, because the button wasn't held down long enough",
+  "The arm moves to the scoring position, then comes back down when the button is let go",
+]
+answer.answer = "The arm keeps moving until it reaches the scoring position"
+context = """
+`onTrue` starts the command when the button is pressed, and then lets it run until it finishes. Letting go of the button doesn't cancel it. That's what `whileTrue` would do.
+"""
+id = "1a8273ae-767b-4dca-bbfa-f3ff528c2683"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Which binding makes a button work like a light switch: press it once to start a command, and press it again to stop it?
+"""
+prompt.distractors = ["`onTrue`", "`whileTrue`", "`onFalse`"]
+answer.answer = "`toggleOnTrue`"
+context = """
+`toggleOnTrue` starts the command on the first press, and cancels it on the next press. `whileTrue` would need the button held the whole time.
+"""
+id = "654196c3-28a8-4be2-b741-247ddf3e31ba"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+When is this trigger true?
+
+```java
+Trigger bothBumpers = robot.driverController.leftBumper().and(robot.driverController.rightBumper());
+```
+"""
+prompt.distractors = [
+  "When either bumper is held",
+  "When the left bumper is pressed, and then the right bumper",
+  "When neither bumper is held",
+]
+answer.answer = "Only while both bumpers are held at the same time"
+context = """
+`and` makes a trigger that's only true when both triggers are true. That makes it hard to set off by accident, which is good for actions that can't be undone.
+"""
+id = "35a9a805-d499-4771-8196-0a78394dc498"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Why does WPILib call the bottom button on the right side of the controller `faceDown()`, instead of something like `a()`?
+"""
+prompt.distractors = [
+  "Because `a` isn't allowed as a method name",
+  "Because it's the most important button",
+  "There's no reason. It's just a different name",
+]
+answer.answer = "Different controllers put different letters or shapes on that button, but it's always on the bottom"
+context = """
+An Xbox controller calls it A, and a PlayStation controller calls it ✕. Naming the buttons by where they are means the same code works with any controller.
+"""
+id = "5758a8b5-5f9e-45e5-b4ba-f4a9a1724839"

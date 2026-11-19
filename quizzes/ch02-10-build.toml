@@ -1,0 +1,31 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+A file has 12 red squiggly lines. Which one should you fix first?
+"""
+prompt.distractors = [
+  "The last one, since it's probably the newest",
+  "The one with the longest message",
+  "It doesn't matter, as long as you fix all of them",
+]
+answer.answer = "The first one"
+context = """
+One mistake, like a missing `}`, can confuse Java about everything after it. Fixing the first error often makes a lot of the others go away.
+"""
+id = "39aeb3b5-5640-48f6-a56e-53e9ab5f81f6"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What's the most likely cause of `Type mismatch: cannot convert from NeedsNameBuilderStage to Command`?
+"""
+prompt.distractors = [
+  "A missing `import`",
+  "A `while` loop with no `coroutine.yield()`",
+  "The command is in the wrong mechanism",
+]
+answer.answer = "A command that's missing its `.named(...)`"
+context = """
+`run(...)` doesn't give back a `Command` yet. It gives back a builder that still needs a name, and `.named(...)` is what turns it into a `Command`.
+"""
+id = "7cb12476-a6ee-4d6d-948e-45cc87d7c883"

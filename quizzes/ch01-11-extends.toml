@@ -1,0 +1,100 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Here are two classes:
+
+```java
+class Player {
+    int health;
+
+    Player(int startingHealth) {
+        health = startingHealth;
+    }
+
+    void takeDamage(int amount) {
+        health = health - amount;
+    }
+
+    boolean isAlive() {
+        return health > 0;
+    }
+}
+
+class Healer extends Player {
+    Healer(int startingHealth) {
+        super(startingHealth);
+    }
+
+    void healFriend(Player friend) {
+        friend.health = friend.health + 20;
+    }
+}
+```
+
+`hana` is a `Healer`. Which methods can you call on `hana`?
+"""
+prompt.distractors = [
+  "Only `healFriend`",
+  "Only `takeDamage` and `isAlive`",
+  "None, because `Healer` doesn't have a `main`",
+]
+answer.answer = "`takeDamage`, `isAlive`, and `healFriend`"
+context = """
+`extends Player` means a `Healer` starts with everything a `Player` has, so it gets `takeDamage` and `isAlive` from `Player`. Then `healFriend` is added on top.
+"""
+id = "e3425231-e38b-4ad2-9632-e12e8a327824"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Here are two classes:
+
+```java
+class Player {
+    int health;
+
+    Player(int startingHealth) {
+        health = startingHealth;
+    }
+}
+
+class Tank extends Player {
+}
+```
+
+`Tank` gets a red squiggly line. Why?
+"""
+prompt.distractors = [
+  "`Tank` needs at least one field of its own",
+  "A class can't extend a class that you wrote yourself",
+  "`Tank` needs to be in its own file",
+]
+answer.answer = "`Tank` needs a constructor that calls `super(...)` with a starting health"
+context = """
+A child class doesn't get its parent's constructor. A `Player` can't be built without a starting health, and a `Tank` is a `Player`, so `Tank` needs a constructor that passes one along, like `Tank(int startingHealth) { super(startingHealth); }`.
+"""
+id = "1d2434d0-4ae1-462f-bac4-c5e4d574983d"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+In this constructor, what does `super(startingHealth);` do?
+
+```java
+class Healer extends Player {
+    Healer(int startingHealth) {
+        super(startingHealth);
+    }
+}
+```
+"""
+prompt.distractors = [
+  "It makes a second, separate `Player`",
+  "It sets `startingHealth` to the highest health allowed",
+  "It calls the `Healer` constructor again",
+]
+answer.answer = "It runs `Player`'s constructor, with `startingHealth` as the value"
+context = """
+`super(...)` means "run my parent's constructor, with these values." It doesn't make a separate `Player`. It sets up the `Player` parts of *this* `Healer`, like its `health`.
+"""
+id = "ec7024d7-d9d7-4b3b-bf25-ab78b5f767fa"

@@ -1,0 +1,65 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "When you click **Run**, where does Java start running your code?"
+prompt.distractors = [
+  "The first line of the file",
+  "Wherever you last clicked in the file",
+  "The line with `class Game` on it",
+]
+answer.answer = "Inside the `{` `}` of `main`"
+context = """
+Java always starts at `main`, and runs what's between its `{` and `}` from top to bottom. When it gets to the end, the program is done.
+"""
+id = "836ef098-e02a-4b31-8cca-d3825956e3bb"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What does this print?
+
+```java
+System.out.println("5 + 3");
+```
+"""
+prompt.distractors = ["`8`", "`\"5 + 3\"`", "It's an error"]
+answer.answer = "`5 + 3`"
+context = """
+Anything in quotes gets printed exactly as written, so Java doesn't do the math. (The quotes themselves don't get printed.) To print `8`, leave out the quotes: `System.out.println(5 + 3);`
+"""
+id = "69cf5603-e596-4851-bc8d-4f8378b937fe"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What does this print?
+
+```java
+System.out.println("one");
+// System.out.println("two");
+System.out.println("three");
+```
+"""
+prompt.distractors = [
+  "`one`, `two`, and `three`, on three lines",
+  "`one`, then `// System.out.println(\"two\");`, then `three`",
+  "Nothing, because there's a comment",
+]
+answer.answer = "`one`, then `three`, on two lines"
+context = """
+Java ignores everything after `//`, so the middle line doesn't do anything. This is a handy way to turn a line off without deleting it.
+"""
+id = "0ff49c0f-bf93-4984-90e2-611625039228"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "You see a red squiggly line under part of your code in VS Code. What does it mean?"
+prompt.distractors = [
+  "That part of the code is running right now",
+  "That part of the code hasn't been saved yet",
+  "That's a comment, so Java will skip it",
+]
+answer.answer = "VS Code thinks there's a mistake there"
+context = """
+Red squiggly lines point out mistakes, like a missing `;`. Move your mouse over the line to see what VS Code thinks is wrong. (A file that isn't saved yet shows a white dot on its tab instead.)
+"""
+id = "9441f2fb-f23f-4a26-8362-b4d545b7a435"

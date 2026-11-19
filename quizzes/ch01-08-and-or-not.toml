@@ -1,0 +1,102 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Here are two methods from a `Player` class:
+
+```java
+boolean isAlive() {
+    return health > 0;
+}
+
+boolean isInDanger() {
+    return isAlive() && health < 20;
+}
+```
+
+If `health` is 0, what does `isInDanger()` return?
+"""
+prompt.distractors = ["`true`, because 0 is less than 20", "It's an error"]
+answer.answer = "`false`"
+context = """
+`isInDanger()` is `isAlive() && health < 20`. `health < 20` is `true`, but `isAlive()` is `false`. `&&` needs *both* sides to be `true`, so the answer is `false`.
+"""
+id = "8ac0d593-268a-4d9f-8139-111379f8e202"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "If `a` and `b` are both `true`, what is `a || b`?"
+prompt.distractors = [
+  "`false`, because \"or\" means only one of them",
+  "It's an error",
+]
+answer.answer = "`true`"
+context = """
+`||` is `true` if *at least one* side is `true`. Both sides being `true` counts.
+"""
+id = "dffa28af-96fa-4d16-bac1-a071e7d5473d"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Which of these asks whether `speed` is between -1 and 1?"
+prompt.distractors = [
+  "`speed >= -1 || speed <= 1`",
+  "`-1 <= speed <= 1`",
+  "`speed >= -1 && <= 1`",
+]
+answer.answer = "`speed >= -1 && speed <= 1`"
+context = """
+You have to ask both questions separately and join them with `&&`.
+- With `||`, every number counts as "between," since every number is either at least -1 or at most 1.
+- `-1 <= speed <= 1` works in math, but it's an error in Java.
+- `&& <= 1` doesn't say *what* has to be at most 1. Each side of `&&` has to be a whole question.
+"""
+id = "26f416b3-5f9d-48d7-9910-a32aa0228e5e"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Here's a class:
+
+```java
+class Player {
+    int health;
+    int maxHealth;
+
+    Player(int startingHealth) {
+        health = startingHealth;
+        maxHealth = startingHealth;
+    }
+
+    void takeDamage(int amount) {
+        health = health - amount;
+        if (health < 0) {
+            health = 0;
+        }
+    }
+
+    void respawn() {
+        if (!isAlive()) {
+            health = maxHealth;
+        }
+    }
+
+    boolean isAlive() {
+        return health > 0;
+    }
+}
+```
+
+What is `bob.health` after this code runs?
+
+```java
+Player bob = new Player(100);
+bob.takeDamage(30);
+bob.respawn();
+```
+"""
+prompt.distractors = ["100", "0", "30"]
+answer.answer = "70"
+context = """
+`respawn` only does something if `!isAlive()` is `true`. `bob` still has 70 health, so `isAlive()` is `true`, `!isAlive()` is `false`, and nothing happens.
+"""
+id = "6a6b6369-cc8b-4d93-87ba-11a7e14b5258"

@@ -1,0 +1,38 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+`Weapon` doesn't say `extends` anything. What's its parent class?
+"""
+prompt.distractors = [
+  "It doesn't have one",
+  "`Player`",
+  "`String`",
+]
+answer.answer = "`Object`"
+context = """
+Every class that doesn't say `extends` extends `Object`. That's where methods like `toString` and `equals` come from.
+"""
+id = "49f80f62-5e9d-46b5-81a5-eb49c7dc8fc7"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+This gets a red squiggly line. Why?
+
+```java
+@Override
+String toString() {
+    return "Sword";
+}
+```
+"""
+prompt.distractors = [
+  "`toString` can't be overridden",
+  "It has to return an `int`",
+  "`@Override` only works on methods from classes we wrote",
+]
+answer.answer = "`Object`'s `toString` is `public`, so the override has to be `public` too"
+context = """
+An override can't be less visible than the method it overrides. Anyone can call `toString` on any object, so every version of it has to be `public`.
+"""
+id = "a045e63a-88a7-404b-a6ab-8176ce7bdff0"

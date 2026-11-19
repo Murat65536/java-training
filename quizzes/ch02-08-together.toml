@@ -1,0 +1,53 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What does this binding do?
+
+```java
+robot.driverController.leftTrigger()
+        .and(robot.intake.holdingGamePiece)
+        .onTrue(robot.intake.eject());
+```
+"""
+prompt.distractors = [
+  "Ejects whenever the intake gets a game piece",
+  "Ejects whenever the left trigger is squeezed, game piece or not",
+  "Picks up a game piece when the left trigger is squeezed",
+]
+answer.answer = "Ejects when the left trigger is squeezed, but only if the intake is holding a game piece"
+context = """
+`and` makes a trigger that's only true when both are true: the left trigger is squeezed, *and* the sensor sees a game piece.
+"""
+id = "854f324c-6f16-4c7f-ade6-d5ec1765d8e3"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Why does `pickUp` go in `Robot`, instead of in `Arm` or `Intake`?
+"""
+prompt.distractors = [
+  "Mechanisms aren't allowed to have commands",
+  "Commands in `Robot` run faster",
+  "It's the only place that can use `awaitAll`",
+]
+answer.answer = "It uses both mechanisms, so it doesn't belong to either one"
+context = """
+Commands that only use one mechanism go in that mechanism's class. A command that coordinates several mechanisms goes in `Robot`, which has all of them.
+"""
+id = "1dcbf398-df9d-46bc-82a8-5dd52d7e4d72"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+`pickUp` is moving the arm down, and the driver presses the button for `moveTo(ArmPosition.SCORING)`. What happens?
+"""
+prompt.distractors = [
+  "Nothing, until `pickUp` finishes",
+  "The arm tries to go both ways at once",
+  "Only the arm part of `pickUp` is canceled, and the rollers keep going",
+]
+answer.answer = "The whole `pickUp` is canceled, intake and all, and the arm goes to the scoring position"
+context = """
+`pickUp` is using the arm at that moment, so a new command that needs the arm cancels it, and everything it started. The driver always gets the last thing they asked for.
+"""
+id = "d41b0c3f-b0fc-45b2-9a33-7ec8a9a36ff1"

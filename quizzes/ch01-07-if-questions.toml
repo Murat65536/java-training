@@ -1,0 +1,19 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "If `health` is 70, what is `health >= 70`?"
+prompt.distractors = ["`false`", "`70`", "It's an error"]
+answer.answer = "`true`"
+context = """
+`>=` means "greater than *or equal to*." 70 is equal to 70, so the answer is `true`. A comparison always gives back a `boolean`, never a number.
+"""
+id = "263e0c11-7e46-4a74-b80f-f5add663c188"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Which of these *asks* whether `health` is 0?"
+prompt.distractors = ["`health = 0`", "`health != 0`", "`0 = health`"]
+answer.answer = "`health == 0`"
+context = """
+`==` asks "are these equal?" A single `=` *sets* `health` to 0. `!=` asks the opposite question: "is `health` *not* 0?"
+"""
+id = "74145da8-1aba-45ae-b3e3-88bd4f694ce6"

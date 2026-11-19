@@ -1,0 +1,86 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Inside `useAbility`, what does `this` mean?
+
+```java
+public void useAbility(Damageable target) {
+    if (isAlive() && ability != null) {
+        ability.use(this, target);
+    }
+}
+```
+"""
+prompt.distractors = [
+  "The `Ability`",
+  "`target`",
+  "The `Player` class itself",
+]
+answer.answer = "The `Player` that `useAbility` was called on"
+context = """
+`this` always means the object the method was called on. So in `bob.useAbility(alice)`, `this` is `bob`, and the ability gets `bob` as its `user`.
+"""
+id = "6582c4de-e010-41af-b2c4-1e8d49b928b1"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+`Ability` has one method, `void use(Player user, Damageable target)`. Which of these is a lambda that makes an `Ability` that heals the user by `HEALER_HEAL_AMOUNT`?
+"""
+prompt.distractors = [
+  "`(user, target) { user.heal(Constants.HEALER_HEAL_AMOUNT); }`",
+  "`user.heal(Constants.HEALER_HEAL_AMOUNT) -> (user, target)`",
+  "`() -> user.heal(Constants.HEALER_HEAL_AMOUNT)`",
+]
+answer.answer = "`(user, target) -> user.heal(Constants.HEALER_HEAL_AMOUNT)`"
+context = """
+A lambda is the parameters, then `->`, then the code to run. `use` has two parameters, so the lambda needs two names in its `()`, even though this one never uses `target`. `()` with nothing inside would mean no parameters at all, so `user` wouldn't exist.
+"""
+id = "b240dbfa-074e-4839-9db9-a2d00e237f65"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Why can't you make a `Damageable` with a lambda?
+
+```java
+interface Damageable {
+    void takeDamage(int amount);
+
+    int getHealth();
+}
+```
+"""
+prompt.distractors = [
+  "Lambdas can only be used for interfaces that Java comes with",
+  "Lambdas can't have an `int` parameter",
+  "You can, as long as you use `{ }`",
+]
+answer.answer = "It has two methods, so Java wouldn't know which one the lambda is supposed to be"
+context = """
+A lambda only works for a *functional interface*: an interface with exactly one method. Java uses that one method to figure out what the lambda's parameters are, and what it gives back. With two methods, there's no way to tell.
+"""
+id = "c344f0d4-2965-444e-b53d-08a3ccf73091"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What's wrong with this lambda?
+
+```java
+bob.learn((user, target) -> {
+    target.takeDamage(Constants.DRAIN_AMOUNT);
+    user.heal(Constants.DRAIN_AMOUNT);
+}
+```
+"""
+prompt.distractors = [
+  "Lambdas can only have one line",
+  "The lines inside the `{ }` shouldn't end with `;`",
+  "Nothing, it's fine",
+]
+answer.answer = "It's missing `);` at the end, to close `learn(` and end the line"
+context = """
+The `}` only closes the lambda. The lambda is inside `learn(...)`, so it still needs a `)` to close `learn`, and a `;` to end the line: `});`.
+"""
+id = "2677b444-0451-4ac1-8773-382e3ee3bbe6"

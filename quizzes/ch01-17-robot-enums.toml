@@ -1,0 +1,85 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+WPILib's `Alliance` enum has two values, `RED` and `BLUE`. What happens with this switch?
+
+```java
+double targetX = switch (alliance) {
+    case RED -> FieldConstants.RED_GOAL_X_METERS;
+};
+```
+"""
+prompt.distractors = [
+  "It works. On the blue alliance, `targetX` is 0",
+  "It works, but it crashes on the blue alliance",
+  "It works, because `RED` is the first value in the enum",
+]
+answer.answer = "It gets a red squiggly line, because it doesn't cover `BLUE`"
+context = """
+This switch gives back a value, so it has to have an answer for every value of `Alliance`. Java catches the missing `BLUE` before the robot ever runs, instead of letting the robot aim at nothing during a match.
+"""
+id = "5e84a73d-6e83-43b1-962b-74a7b8d132a8"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Why does robot code need to know which alliance it's on?
+"""
+prompt.distractors = [
+  "Robots on the blue alliance have to drive more slowly",
+  "So it knows its own team number",
+  "It doesn't. Alliances only matter to the referees",
+]
+answer.answer = "The field is a mirror image, so where things are depends on which side the robot's alliance is on"
+context = """
+The red alliance's goals are on one side of the field, and the blue alliance's are on the other. A switch on the alliance lets the same code pick the right target on either side.
+"""
+id = "22db3b80-d2c2-4d4c-80be-3a4b8b458a25"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Here's an enum:
+
+```java
+public enum ArmPosition {
+    STOWED(0.0),
+    INTAKE(15.0),
+    SCORING(80.0);
+
+    private final double angleDegrees;
+
+    ArmPosition(double positionAngleDegrees) {
+        angleDegrees = positionAngleDegrees;
+    }
+
+    public double getAngleDegrees() {
+        return angleDegrees;
+    }
+}
+```
+
+What does `ArmPosition.INTAKE.getAngleDegrees()` give back?
+"""
+prompt.distractors = ["1", "`INTAKE`", "0.0"]
+answer.answer = "15.0"
+context = """
+`INTAKE(15.0)` calls the enum's constructor with `15.0`, which stores it in `INTAKE`'s `angleDegrees`. The getter gives it back.
+"""
+id = "3d9d1886-bfd7-4bfe-b71b-3345789f0424"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Why doesn't the `ArmPosition` constructor say `public`?
+"""
+prompt.distractors = [
+  "Constructors never say `public`",
+  "So that `getAngleDegrees` can be `public`",
+  "It's a mistake. It should say `public`",
+]
+answer.answer = "Nobody else can make new `ArmPosition`s. The only ones that exist are the ones listed in the enum"
+context = """
+An enum's constructor is only used for the values in its own list, like `SCORING(80.0)`. Code anywhere else can't call it, so there's no reason for it to be `public`. That's what keeps an enum from ever having a value that isn't in its list.
+"""
+id = "d58cc9ae-5801-4d98-95c7-783bb4c669b2"

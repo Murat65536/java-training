@@ -1,0 +1,55 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "What's the difference between a class and an object?"
+prompt.distractors = [
+  "An object is the blueprint, and a class is something built from it",
+  "A class is a variable, and an object is its value",
+  "They're two names for the same thing",
+]
+answer.answer = "A class is the blueprint, and an object is something built from it"
+context = """
+The class (`class Player { }`) only describes what a `Player` is. Each time you use `new Player()`, you build an actual `Player` object from that blueprint.
+"""
+id = "541a58c1-aa13-4e7b-8c65-46472f950f90"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Which line builds a new `Player` and keeps it in a variable named `sam`?"
+prompt.distractors = [
+  "`Player sam = Player();`",
+  "`new Player sam;`",
+  "`Player = new sam();`",
+]
+answer.answer = "`Player sam = new Player();`"
+context = """
+It's the same pattern as `int v = 42;`: the type (`Player`), the name (`sam`), `=`, then the value. Here the value is a brand new `Player`, which you get with `new Player()`.
+"""
+id = "a58ab3ea-ab98-4073-b83a-8dc4fdf2973f"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+After these lines run, how many `Player` objects can we still use?
+
+```java
+Player a = new Player();
+new Player();
+Player b = new Player();
+```
+"""
+prompt.distractors = ["3", "1", "0"]
+answer.answer = "2"
+context = """
+All three lines build a `Player`, but the middle one isn't stored in a variable. Once that line is done, nothing is holding on to it, so it's gone. Only `a` and `b` are left.
+"""
+id = "47e2b5f6-5bdd-4fd8-84e2-91350df3294d"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Which of these types is a class?"
+prompt.distractors = ["`int`", "`double`", "`boolean`"]
+answer.answer = "`String`"
+context = """
+`String` is a class that comes built into Java, which is why it starts with a capital letter. `int`, `double`, and `boolean` are primitives, so they aren't classes.
+"""
+id = "842e095d-f1d0-4079-b19a-985f13821ab9"

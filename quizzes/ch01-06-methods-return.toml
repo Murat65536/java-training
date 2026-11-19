@@ -1,0 +1,67 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "What does `void` mean in front of a method?"
+prompt.distractors = [
+  "The method has no code inside it",
+  "The method doesn't take any parameters",
+  "The method can't be called",
+]
+answer.answer = "The method doesn't give anything back"
+context = """
+The type in front of a method says what it gives back. `void` means nothing: the method just does its job.
+"""
+id = "c275ea34-8249-487b-abd0-8edddd939892"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Here's a class:
+
+```java
+class Player {
+    int health;
+    int maxHealth;
+
+    Player(int startingHealth) {
+        health = startingHealth;
+        maxHealth = startingHealth;
+    }
+
+    void takeDamage(int amount) {
+        health = health - amount;
+    }
+
+    int missingHealth() {
+        return maxHealth - health;
+    }
+}
+```
+
+What is `missing` after this code runs?
+
+```java
+Player bob = new Player(80);
+bob.takeDamage(30);
+int missing = bob.missingHealth();
+```
+"""
+prompt.distractors = ["50", "80", "70"]
+answer.answer = "30"
+context = """
+The constructor sets both `health` and `maxHealth` to 80. After `takeDamage(30)`, `health` is 50, so `missingHealth()` returns `80 - 50`, which is 30.
+"""
+id = "d3277f91-14a6-4ca7-a750-47c812295731"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Which of these methods gives an error?"
+prompt.distractors = [
+  "`int getTen() { return 10; }`",
+  "`void reset() { health = 100; }`",
+  "`int getHealth() { return health; }`",
+]
+answer.answer = "`int getHalf() { return 0.5; }`"
+context = """
+`int` in front of `getHalf` is a promise to give back an `int`, but `0.5` isn't a whole number. It's the same reason you can't write `int x = 0.5;`.
+"""
+id = "5c85c040-05ef-48ac-8fc3-d6ec6b32b65c"

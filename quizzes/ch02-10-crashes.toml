@@ -1,0 +1,47 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+In a stack trace, which `at` line is usually the best place to start looking?
+"""
+prompt.distractors = [
+  "The very last one",
+  "The first one that starts with `org.wpilib`",
+  "Any of them, since they all point to the same line",
+]
+answer.answer = "The first one that's in our code, starting with `frc.robot`"
+context = """
+The top line is where the exception actually happened, and each line below it called the one above. The lines inside WPILib or Java are just how the program got to our code, so the bug is almost always in the first line that's ours.
+"""
+id = "dd5da07c-6288-4d4a-8125-1b1c70e9040d"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What happens on the real robot when its code throws an exception that nothing catches?
+"""
+prompt.distractors = [
+  "The command that threw it stops, and everything else keeps running",
+  "Nothing. Exceptions only matter in the simulator",
+  "The Driver Station fixes it automatically",
+]
+answer.answer = "The robot program stops, and the robot is dead until the code starts back up"
+context = """
+An uncaught exception stops the whole program. The Driver Station shows No Robot Code until it restarts, which takes several seconds. In a match, that's a long time.
+"""
+id = "34bdf442-3966-488a-bff2-fb7421c7a7fb"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Your command needs to wait half a second. What should it use?
+"""
+prompt.distractors = [
+  "`Thread.sleep(500)`",
+  "A `while` loop that counts to a million",
+  "A breakpoint",
+]
+answer.answer = "`coroutine.wait(...)`"
+context = """
+`coroutine.wait` yields while it waits, so the rest of the robot keeps running. `Thread.sleep` and busy loops freeze the whole robot program until they're done.
+"""
+id = "bf7e5c8c-fae5-4272-8588-721967626bd4"

@@ -1,0 +1,47 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Why is the `Mechanism2d` drawing in `Arm`, instead of in `SimArmIO`?
+"""
+prompt.distractors = [
+  "Because `SimArmIO` can't import `Mechanism2d`",
+  "Because drawings only work in the simulator",
+  "There's no reason, it would work the same in either",
+]
+answer.answer = "So it also works on the real robot, drawing wherever the real arm's angle says it is"
+context = """
+`Arm` gets its angle from whichever IO it has, real or pretend. Drawing it in `Arm` means the drivers can watch the real arm on a dashboard too, not just the simulated one.
+"""
+id = "9a99eee5-e24d-48d4-8923-a61037473b6c"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+In the new simulation, the arm slowly sinks when nobody is moving it. What's going on?
+"""
+prompt.distractors = [
+  "It's a bug in `SingleJointedArmSim`",
+  "`idle()` is pushing the arm down",
+  "The battery is running out in the simulator",
+]
+answer.answer = "Gravity is pulling it down, and nothing is pushing back"
+context = """
+`idle()` sets the throttle to 0, so the motor isn't pushing at all, and gravity wins. A real arm would sink the same way. The old pretend arm could never have shown us this, because it didn't have gravity.
+"""
+id = "e2892599-d0db-4dad-b17e-b6b7d8845b2a"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Where does gravity pull hardest on an arm?
+"""
+prompt.distractors = [
+  "When it's pointing straight up",
+  "It pulls the same at every angle",
+  "When it's moving fastest",
+]
+answer.answer = "When it's sticking straight out, level with the ground"
+context = """
+Level with the ground, all of the arm's weight is trying to swing it down. Pointing straight up, gravity pulls straight down along the arm, so it doesn't try to turn it at all. That's why the holding throttle is multiplied by the cosine of the angle: 1 when level, and 0 when straight up.
+"""
+id = "d665f347-5eca-414c-aeec-460b4c92f8c9"

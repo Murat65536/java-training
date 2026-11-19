@@ -1,0 +1,37 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What does this print?
+
+```java
+int health = 0;
+String status = health > 0 ? "alive" : "knocked out";
+System.out.println(status);
+```
+"""
+prompt.distractors = [
+  "`alive`",
+  "`true`",
+  "Nothing, because there's a red squiggly line",
+]
+answer.answer = "`knocked out`"
+context = """
+`health > 0` is `false`, so the ternary picks the value after the `:`.
+"""
+id = "f591b41c-a066-4ccf-849c-f8c2bbdbeaa0"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Which if statement does the same thing as `int damage = hasSword ? 25 : 1;`?
+"""
+prompt.distractors = [
+  "`int damage = 25; if (hasSword) { damage = 1; }`",
+  "`int damage; if (damage == 25) { hasSword = true; }`",
+  "`int damage = 1; if (!hasSword) { damage = 25; }`",
+]
+answer.answer = "`int damage = 1; if (hasSword) { damage = 25; }`"
+context = """
+The value after the `?` is for when the question is `true`, and the value after the `:` is for when it's `false`. So players with a sword do 25 damage, and everyone else does 1.
+"""
+id = "16a8ab7e-d61a-4835-879a-fce3d339b366"

@@ -1,0 +1,47 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What does `import static org.wpilib.units.Units.Degrees;` let you do?
+"""
+prompt.distractors = [
+  "Use the `Units` class at all",
+  "Make `Degrees` a `static` field",
+  "Measure every angle in degrees automatically",
+]
+answer.answer = "Write `Degrees` instead of `Units.Degrees`"
+context = """
+`Degrees` is a `static` field in the `Units` class. A normal `import` would still make you write `Units.Degrees`. An `import static` lets you use it by itself.
+"""
+id = "bbbde6c3-f353-46ba-b0b6-d298b015441d"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Why does `ArmIO` still use a `double` in degrees, instead of an `Angle`?
+"""
+prompt.distractors = [
+  "Because interfaces can't use `Angle`s",
+  "Because the simulator doesn't understand units",
+  "It's a mistake. It should use an `Angle`",
+]
+answer.answer = "The IO is where our code meets the hardware, and `Arm` turns its number into an `Angle` right away"
+context = """
+Every motor library has its own way of doing things, so the IO is the one place that deals with plain numbers. `getAngle` turns the IO's number into an `Angle` immediately, so everything else in our code works with `Angle`s.
+"""
+id = "b0a0119a-caee-4887-abcc-c8ccc8739a02"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+`moveTo` has `.withTimeout(ArmConstants.MOVE_TIMEOUT)` on the end, and the arm gets jammed. What happens after `MOVE_TIMEOUT`?
+"""
+prompt.distractors = [
+  "The arm tries again from the beginning",
+  "The robot is disabled",
+  "Nothing. `moveTo` keeps going until the arm gets there",
+]
+answer.answer = "`moveTo` gets canceled, and the arm's idle command stops it"
+context = """
+`withTimeout` cancels the command if it's still running after the time limit. A canceled command just stops, so its own `setThrottle(0)` never runs. But then nothing is using the arm, so the scheduler runs `idle()`, which stops it.
+"""
+id = "17602b65-8170-4e1f-9ddf-d26b6e74b8b1"

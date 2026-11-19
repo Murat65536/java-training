@@ -1,0 +1,67 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+If `health` is 50, what is `score` after this code runs?
+
+```java
+int score = 0;
+if (health > 50) {
+    score = 1;
+} else {
+    score = 2;
+}
+```
+"""
+prompt.distractors = ["1", "0", "It runs both, so it ends up 2 after being 1"]
+answer.answer = "2"
+context = """
+50 is not *greater* than 50, so `health > 50` is `false` and the `else` part runs. Exactly one of the two parts runs, never both.
+"""
+id = "31be8e16-6d8a-4f78-876b-adfff933b879"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Here's a class:
+
+```java
+class Player {
+    int health;
+
+    Player(int startingHealth) {
+        health = startingHealth;
+    }
+
+    void takeDamage(int amount) {
+        health = health - amount;
+        if (health < 0) {
+            health = 0;
+        }
+    }
+
+    void heal(int amount) {
+        if (isAlive()) {
+            health = health + amount;
+        }
+    }
+
+    boolean isAlive() {
+        return health > 0;
+    }
+}
+```
+
+What is `bob.health` after this code runs?
+
+```java
+Player bob = new Player(100);
+bob.takeDamage(150);
+bob.heal(20);
+```
+"""
+prompt.distractors = ["-30", "20", "-50"]
+answer.answer = "0"
+context = """
+`takeDamage(150)` would take `bob` to -50, but the if statement sets it back to 0. Then `heal(20)` checks `isAlive()`, which is `false` since `health` is 0, so it doesn't heal at all.
+"""
+id = "bbfebec0-6eaf-48ab-b75f-8e547d4d15b6"

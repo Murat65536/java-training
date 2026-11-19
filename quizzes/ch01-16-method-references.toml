@@ -1,0 +1,81 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+`Condition` has one method, `boolean isMet()`. What does this print?
+
+```java
+Player bob = new Player(100);
+Condition inDanger = () -> bob.isInDanger();
+bob.takeDamage(90);
+System.out.println(inDanger.isMet());
+```
+"""
+prompt.distractors = [
+  "`false`, because `bob` wasn't in danger when the lambda was made",
+  "It's an error, because `Condition` doesn't say how to check",
+  "`90`",
+]
+answer.answer = "`true`, because the lambda checks `bob` when `isMet` is called"
+context = """
+Making a lambda doesn't run its code. It only runs when something calls the method, here `isMet()`. By then, `bob` has taken 90 damage, so `bob.isInDanger()` is `true`.
+"""
+id = "f92cf96d-7dcd-4f2c-9741-eb86bffed254"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Which of these is the same as `() -> bob.respawn()`?
+"""
+prompt.distractors = [
+  "`bob.respawn()`",
+  "`bob::respawn()`",
+  "`respawn::bob`",
+]
+answer.answer = "`bob::respawn`"
+context = """
+A method reference is the object, then `::`, then the method's name, with no `()`. The `()` would mean "call it right now," but a method reference hands the method over so something else can call it later. `bob.respawn()` with no `::` would respawn `bob` immediately instead.
+"""
+id = "39f83aaf-495e-4d4d-960a-6148c072ea0b"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Which line gets a red squiggly line?
+
+```java
+Player target = alice;
+Runnable punch = () -> bob.attack(target);
+target = carl;
+punch.run();
+```
+"""
+prompt.distractors = [
+  "`Player target = alice;`",
+  "`punch.run();`",
+  "None of them",
+]
+answer.answer = "`Runnable punch = () -> bob.attack(target);`"
+context = """
+A lambda can only use a variable from around it if that variable never changes. `target` gets changed to `carl` after the lambda is made, so the lambda can't use it. If you need a different target, make a different variable.
+"""
+id = "0972c78f-ae63-4ce4-9f72-8e74c8c37cb8"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Why does robot code read the joystick with a lambda, like this?
+
+```java
+DoubleSupplier forwardSpeed = () -> -controller.getLeftY();
+```
+"""
+prompt.distractors = [
+  "Because joysticks can only be read inside a lambda",
+  "Because the `-` only works in a lambda",
+  "It doesn't need to. A `double` would work just as well",
+]
+answer.answer = "So every time the code asks for the speed, it gets where the joystick is right now"
+context = """
+A `double` would only hold where the joystick was at the moment it was stored. The lambda runs `controller.getLeftY()` again every time something asks `forwardSpeed` for a number, so it always has the joystick's latest position.
+"""
+id = "9e495a16-b54a-4cae-97c2-0a6b004ffb0d"

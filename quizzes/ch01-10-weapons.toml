@@ -1,0 +1,96 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Here are two classes:
+
+```java
+class Weapon {
+    String name;
+    int damage;
+
+    Weapon(String weaponName, int weaponDamage) {
+        name = weaponName;
+        damage = weaponDamage;
+    }
+}
+
+class Player {
+    Weapon weapon;
+}
+```
+
+Which line prints the name of `bob`'s weapon?
+"""
+prompt.distractors = [
+  "`System.out.println(bob.name.weapon);`",
+  "`System.out.println(Weapon.name);`",
+  "`System.out.println(bob.weapon(name));`",
+]
+answer.answer = "`System.out.println(bob.weapon.name);`"
+context = """
+Read it left to right: start at `bob`, look inside at `bob`'s `weapon`, then look inside the weapon at its `name`.
+`Weapon.name` doesn't work, because `Weapon` is the blueprint. Only actual `Weapon` objects have a name.
+"""
+id = "9c4d4d5d-a1ba-4402-a89d-5fed5e7523c9"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Here are two classes:
+
+```java
+class Weapon {
+    int damage;
+
+    Weapon(int weaponDamage) {
+        damage = weaponDamage;
+    }
+}
+
+class Player {
+    int health;
+    Weapon weapon;
+
+    Player(int startingHealth) {
+        health = startingHealth;
+    }
+
+    void takeDamage(int amount) {
+        health = health - amount;
+    }
+
+    void attack(Player target) {
+        target.takeDamage(weapon.damage);
+    }
+}
+```
+
+What is `alice.health` after this code runs?
+
+```java
+Player bob = new Player(100);
+Player alice = new Player(100);
+bob.weapon = new Weapon(15);
+bob.attack(alice);
+bob.attack(alice);
+```
+"""
+prompt.distractors = ["85", "100", "15"]
+answer.answer = "70"
+context = """
+Each attack does `bob`'s weapon's damage, which is 15. Two attacks take `alice` from 100 down to 70.
+"""
+id = "9484784e-f29a-4bc1-a956-e65e26a1422a"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Can a field's type be a class that you made yourself, like `Weapon`?"
+prompt.distractors = [
+  "No, fields can only be primitives like `int` and `boolean`",
+  "Only if the field is a `String`",
+]
+answer.answer = "Yes, a field can be any type"
+context = """
+A field is just a variable that belongs to a class, and a variable can be any type. So `Weapon weapon;` works the same way `int health;` does.
+"""
+id = "658e3e92-68cb-4b93-bd7d-eb91ec92994a"

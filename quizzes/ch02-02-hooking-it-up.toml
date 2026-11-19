@@ -1,0 +1,63 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+In `robotPeriodic()`, why does `arm.update()` come before `Scheduler.getDefault().run()`?
+"""
+prompt.distractors = [
+  "Because the scheduler can only run once the arm has updated at least once",
+  "It doesn't matter which comes first",
+  "Because `update` is the arm's default command",
+]
+answer.answer = "So the commands that run next get the arm's newest angle"
+context = """
+Commands like `moveTo` make decisions based on the arm's angle. Updating the arm first means they're always working with the latest information, instead of the angle from last time.
+"""
+id = "d9d4daf0-7408-406e-99be-bab5cfb3ed05"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+`setThrottle` in `Arm` is `private`, and it clamps the throttle between `-MAX_THROTTLE` and `MAX_THROTTLE`. Why does that matter?
+"""
+prompt.distractors = [
+  "It makes the arm move faster",
+  "Private methods run faster than public ones",
+  "It means the simulator can't move the arm",
+]
+answer.answer = "No code outside `Arm` can move the arm faster than `MAX_THROTTLE`, or skip the limit"
+context = """
+Just like `takeDamage` protected a `Player`'s health, `setThrottle` protects the arm. Every command has to go through it, so the speed limit can't be skipped, no matter who writes the command.
+"""
+id = "e1514776-7a76-4ed1-b440-ab441e403ba8"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What would you change to run this same arm code on the real robot?
+"""
+prompt.distractors = [
+  "Rewrite `moveTo` and `idle` to use the real motor",
+  "Change every button binding in `ExampleTeleop`",
+  "Nothing. The simulator code runs on the robot as-is",
+]
+answer.answer = "Make the `Arm` with `new RealArmIO()` instead of `new SimArmIO()`"
+context = """
+That.s what the IO interface is for. `Arm` only ever talks to an `ArmIO`, so every command and binding works the same no matter which IO it's given. Only the one line that picks the IO changes.
+"""
+id = "b1d62950-ec84-4460-b5d2-37c1d7737130"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What does `Telemetry.log("Arm/Angle", getAngleDegrees())` do?
+"""
+prompt.distractors = [
+  "It prints the angle in VS Code's terminal",
+  "It saves the angle so the arm can go back to it later",
+  "It sets the arm's angle",
+]
+answer.answer = "It sends the arm's angle to dashboards, like AdvantageScope, under the name `Arm/Angle`"
+context = """
+Telemetry is information the robot sends back for you to look at. Dashboards like AdvantageScope can show it as a number or draw a graph of it, which is much easier to read than 50 `println`s a second.
+"""
+id = "7cb1c6ce-9bd7-45d4-ace1-5c441e118f61"

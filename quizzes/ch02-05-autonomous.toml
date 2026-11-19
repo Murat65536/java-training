@@ -1,0 +1,55 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Why does `ScoreAndStowAuto` bind its routine to an `enabled` trigger, instead of just starting it in the constructor?
+"""
+prompt.distractors = [
+  "Because constructors can't start commands",
+  "Because autonomous opmodes are made after the match starts",
+  "It doesn't need to. Both ways work the same",
+]
+answer.answer = "The opmode is made when the drivers pick it, while the robot is disabled, and disabled robots can't run commands"
+context = """
+The drivers usually pick the autonomous opmode long before the match starts. The `enabled` trigger waits until the robot is actually enabled, at the start of the match, and starts the routine then.
+"""
+id = "bf31d20a-586b-4f28-ac84-06be3ecf1a75"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What does this routine do?
+
+```java
+Command.noRequirements(coroutine -> {
+    coroutine.await(robot.arm.moveTo(ArmPosition.SCORING));
+    coroutine.wait(AutoConstants.SCORE_TIME);
+    coroutine.await(robot.arm.moveTo(ArmPosition.STOWED));
+}).named("Auto.ScoreAndStow")
+```
+"""
+prompt.distractors = [
+  "Starts moving to scoring and to stowed at the same time",
+  "Moves to the scoring position and stays there",
+  "Waits for `SCORE_TIME`, then moves to the scoring position",
+]
+answer.answer = "Moves the arm up to score, waits for `SCORE_TIME`, then moves it back down"
+context = """
+Each line finishes before the next one starts. `await` waits for the command it started to finish, and `wait` waits for an amount of time, so the routine happens in order, top to bottom.
+"""
+id = "a9a22920-61e9-4831-9f7c-e2bc8ce44092"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What's the difference between `coroutine.await(a)` followed by `coroutine.await(b)`, and `coroutine.awaitAll(a, b)`?
+"""
+prompt.distractors = [
+  "There's no difference",
+  "`awaitAll` runs `b` first",
+  "`awaitAll` only waits for whichever one finishes first",
+]
+answer.answer = "The first runs `a`, then `b`. `awaitAll` runs them both at the same time, and waits for both"
+context = """
+Two `await`s happen one after the other. `awaitAll` starts every command at once, and waits until all of them are done. That's useful when two different mechanisms can do their jobs at the same time.
+"""
+id = "dfa83ed7-4a2e-4e9d-914d-2363751cf6f0"

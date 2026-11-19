@@ -1,0 +1,32 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What is `speed` after this code runs?
+
+```java
+int speed = 5;
+if (speed > 10) {
+    speed = 10;
+}
+```
+"""
+prompt.distractors = ["10", "15", "It's an error"]
+answer.answer = "5"
+context = """
+`speed > 10` is `false`, since 5 isn't greater than 10. So Java skips everything inside the `{` `}`, and `speed` stays 5.
+"""
+id = "ff188d82-f2e8-4c27-baf1-4508e8f5764d"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Assume `health` is an `int`. Which of these gives an error?"
+prompt.distractors = [
+  "`if (health > 0) { }`",
+  "`if (health == 100) { }`",
+  "`if (health != 0) { }`",
+]
+answer.answer = "`if (health) { }`"
+context = """
+The question in an if statement has to be a `boolean`. `health` is a number, not a question, so Java won't accept it.
+"""
+id = "d9f33e75-fc76-45e1-83cc-8bd74f7edefb"

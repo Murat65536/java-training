@@ -1,0 +1,47 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Why does every stick in `driverControl`'s lambda have a `-` in front of it?
+"""
+prompt.distractors = [
+  "To make the robot drive backward, because the front of the robot is its back",
+  "Because `ChassisVelocities` only takes negative numbers",
+  "Only the turning stick needs it, and the others are a mistake",
+]
+answer.answer = "Pushing a stick forward or left gives a negative number, but forward and left are positive on the field"
+context = """
+Forward on the stick is negative `getLeftY()`, but should be positive x. Left on the stick is negative `getLeftX()`, but should be positive y. And left on the right stick should turn counterclockwise, which is positive.
+"""
+id = "cb347bc2-8898-4b14-9863-06a6dbc6a15e"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What does `MatchState.getAlliance().orElse(Alliance.BLUE)` give back if the robot doesn't know its alliance yet?
+"""
+prompt.distractors = [
+  "`null`",
+  "`Alliance.RED`",
+  "It crashes",
+]
+answer.answer = "`Alliance.BLUE`"
+context = """
+`getAlliance()` gives back an `Optional`, a box that might be empty. `orElse` gives back what's in the box, or the value you hand it if the box is empty.
+"""
+id = "f30aee1a-36d5-4a7c-8b82-b10560f6d8fe"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Why does the heading controller need `enableContinuousInput(-Math.PI, Math.PI)`?
+"""
+prompt.distractors = [
+  "So it gives back degrees instead of radians",
+  "So the robot can turn faster than `MAX_TURN_SPEED`",
+  "It doesn't. It's only there in case the gyro breaks",
+]
+answer.answer = "So it knows angles wrap around, and always turns the short way"
+context = """
+179 degrees and -179 degrees are only 2 degrees apart, but their plain difference is 358. Continuous input tells the controller that the angle wraps around, so it sees a 2-degree error instead.
+"""
+id = "c008dfb4-fce6-4e33-884d-d850dc38b344"

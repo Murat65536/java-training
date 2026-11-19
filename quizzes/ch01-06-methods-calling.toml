@@ -1,0 +1,75 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What is `x` after this code runs?
+
+```java
+int x = 10;
+x = x + 5;
+```
+"""
+prompt.distractors = ["10", "5", "It's an error, because `x` can't equal `x + 5`"]
+answer.answer = "15"
+context = """
+`=` means "set," not "equals." Java works out the right side first (`10 + 5` is `15`), then puts the answer into `x`.
+"""
+id = "c3d82c3e-6f1f-4f08-b2bc-471e75f3dd9c"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Which of these is a method, not a constructor? (Assume it's inside `class Player`.)"
+prompt.distractors = [
+  "`Player() { }`",
+  "`Player(int startingHealth) { }`",
+]
+answer.answer = "`void jump() { }`"
+context = """
+A method has a type in front of it (`void` here) and its own name. A constructor never has a type, and its name is always the class name.
+"""
+id = "6bf9092a-8996-4f10-8050-bb9cf428d1de"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Here's a class:
+
+```java
+class Player {
+    int health;
+
+    Player(int startingHealth) {
+        health = startingHealth;
+    }
+
+    void takeDamage(int amount) {
+        health = health - amount;
+    }
+}
+```
+
+What is `bob.health` after this code runs?
+
+```java
+Player bob = new Player(100);
+Player alice = new Player(100);
+alice.takeDamage(40);
+bob.takeDamage(10);
+alice.takeDamage(5);
+```
+"""
+prompt.distractors = ["45", "55", "100"]
+answer.answer = "90"
+context = """
+Calling `takeDamage` on `alice` only changes `alice`'s health. `bob` only took 10 damage, so `bob` is at 90.
+"""
+id = "742e31fb-5cff-449c-bb9e-66eba7415927"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "In `System.out.println(\"Hi\");`, what is `println`?"
+prompt.distractors = ["A field", "A class", "A variable"]
+answer.answer = "A method"
+context = """
+It's the same pattern as `bob.takeDamage(30)`: an object (`System.out`), a `.`, and then a method (`println`) with a value for its parameter in the `()`.
+"""
+id = "cc3b1176-ce3c-4b92-a94c-a7d31295ff72"

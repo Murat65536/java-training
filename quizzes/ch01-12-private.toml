@@ -1,0 +1,110 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Here's a class:
+
+```java
+class Player {
+    private int health;
+
+    Player(int startingHealth) {
+        health = startingHealth;
+    }
+
+    void takeDamage(int amount) {
+        health = health - amount;
+    }
+
+    int getHealth() {
+        return health;
+    }
+}
+```
+
+This code is in `main`, in the `Game` class. Which line gets a red squiggly line?
+"""
+prompt.distractors = [
+  "`Player bob = new Player(100);`",
+  "`bob.takeDamage(500);`",
+  "`System.out.println(bob.getHealth());`",
+]
+answer.answer = "`bob.health = 500;`"
+context = """
+`health` is `private`, so only code inside `Player` can use it. `main` is in `Game`, so it can't touch `bob.health` directly. It can still call `Player`'s methods, though, and those methods can use `health`.
+"""
+id = "9d2063e9-e2ee-41d7-bec7-c4b09fd038c3"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+`takeDamage` and `heal` already keep a `Player`'s health between 0 and `maxHealth`. Why make `health` private too?
+"""
+prompt.distractors = [
+  "It makes the program run faster",
+  "So nobody can ever find out how much health a `Player` has",
+  "Fields don't work unless they're private",
+]
+answer.answer = "So code outside `Player` can't skip the checks in `takeDamage` and `heal`"
+context = """
+If `health` isn't private, any code can write something like `bob.health = 9999;` and skip every check. Making it private means the methods are the *only* way to change it.
+Other code can still find out how much health a `Player` has, if `Player` gives it a getter like `getHealth()`.
+"""
+id = "834bc405-59af-4ed9-bb70-4af8e9901ad9"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Here are two classes:
+
+```java
+class Player {
+    private int health;
+
+    Player(int startingHealth) {
+        health = startingHealth;
+    }
+
+    void heal(int amount) {
+        health = health + amount;
+    }
+}
+
+class Healer extends Player {
+    Healer(int startingHealth) {
+        super(startingHealth);
+    }
+
+    void healSelf() {
+        health = health + 20;
+    }
+}
+```
+
+What happens?
+"""
+prompt.distractors = [
+  "It works, because a `Healer` is a `Player`",
+  "It works, but it only changes `Healer`'s own copy of `health`",
+  "It crashes when `healSelf` is called",
+]
+answer.answer = "`healSelf` gets a red squiggly line, because `Healer` can't use `Player`'s private fields"
+context = """
+`private` means *only* code inside `Player`. A `Healer` still has a `health` field, but `Healer`'s code can't touch it directly. It has to go through `Player`'s methods, like `heal(20);`.
+"""
+id = "2b177560-0e19-42ff-8a4c-0164839ea7a7"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+`Player` has a private field named `x`. Which method lets other code *see* `x`, without letting it *change* `x`?
+"""
+prompt.distractors = [
+  "`void getX() { return x; }`",
+  "`int getX(int newX) { x = newX; return x; }`",
+  "`void setX(int newX) { x = newX; }`",
+]
+answer.answer = "`int getX() { return x; }`"
+context = """
+A getter gives back a copy of the field, so its type has to match the field (`int`, not `void`). It shouldn't change the field. The other two let any code set `x` to anything they want, which skips the checks in `move`.
+"""
+id = "f21db117-7ef7-413a-b3f1-46113f6464b8"

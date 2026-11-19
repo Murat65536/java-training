@@ -1,0 +1,55 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "When does the code inside a constructor run?"
+prompt.distractors = [
+  "Once, when the program starts",
+  "When you write the class",
+  "Every time you use one of the object's fields",
+]
+answer.answer = "Every time you use `new` to build an object"
+context = """
+A constructor is the setup code for each new object. `new Player()` runs it once for that `Player`, and the next `new Player()` runs it again for the next one.
+"""
+id = "d922dcfa-5582-4864-a483-bb68f491b46d"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Which of these is a correct constructor for a class named `Player`?"
+prompt.distractors = [
+  "`player(int h) { health = h; }`",
+  "`Constructor(int h) { health = h; }`",
+  "`Player(h) { health = h; }`",
+]
+answer.answer = "`Player(int h) { health = h; }`"
+context = """
+A constructor's name has to match the class name exactly, capital letter and all, so `player` doesn't count.
+Parameters are variables, so each one needs a type and a name. `(h)` is missing the type.
+"""
+id = "824b448a-5e14-49d0-bd6e-56fbdfe8bd2a"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Here's a class:
+
+```java
+class Player {
+    int health;
+
+    Player(int startingHealth) {
+        health = startingHealth;
+    }
+}
+```
+
+Which line gives an error?
+"""
+prompt.distractors = [
+  "`Player p = new Player(0);`",
+  "`Player p = new Player(250);`",
+]
+answer.answer = "`Player p = new Player();`"
+context = """
+Our constructor needs a number. Java only gives you the free empty constructor if you didn't write one yourself, so `new Player()` with nothing in the `()` doesn't work anymore.
+"""
+id = "9074542b-22df-441e-84a6-ea581931065e"

@@ -1,0 +1,48 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What does this print?
+
+```java
+String name = "Sam";
+System.out.println("Hi " + name);
+```
+"""
+prompt.distractors = ["`Hi name`", "`\"Hi \" + name`", "`HiSam`"]
+answer.answer = "`Hi Sam`"
+context = """
+`name` isn't in quotes, so Java uses what's stored in it, `"Sam"`. Then `+` glues the two Strings together. The space comes from the end of `"Hi "`.
+"""
+id = "e20bd2ed-099f-4b56-b25e-99a712e5f925"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What does this print?
+
+```java
+System.out.println("Score: " + 4 + 1);
+```
+"""
+prompt.distractors = ["`Score: 5`", "`Score: 4 + 1`", "It's an error"]
+answer.answer = "`Score: 41`"
+context = """
+Java works left to right. `"Score: " + 4` is the text `"Score: 4"`, and then `+ 1` glues a `1` on the end. To get `Score: 5`, write `"Score: " + (4 + 1)`.
+"""
+id = "4a2334e8-61b4-40ed-8afb-1787e14b6e33"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Which of these lines works?"
+prompt.distractors = [
+  "`string team = \"Robots\";`",
+  "`String team = 'Robots';`",
+  "`String team = Robots;`",
+]
+answer.answer = "`String team = \"Robots\";`"
+context = """
+- `String` isn't a primitive type, and its name starts with a capital `S`.
+- Single quotes are only for one `char`. Strings need double quotes.
+- Without any quotes, Java thinks `Robots` is the name of a variable, and there isn't one.
+"""
+id = "777066ce-2332-4aa2-802e-6be667fb03e9"

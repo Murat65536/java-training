@@ -1,0 +1,63 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+You're about to start adding a climber. What should you do first?
+"""
+prompt.distractors = [
+  "Start writing code on `main`, so everyone gets it right away",
+  "Clone the repo again into a new folder",
+  "Open a pull request",
+]
+answer.answer = "Switch to `main`, pull, and make a new branch, like `climber`"
+context = """
+Pulling first means you start from everyone's newest code. Working on your own branch means your half-finished climber can't break anyone else's code, until it's reviewed and merged.
+"""
+id = "607da3a4-2166-49e2-875d-767fdbdfc678"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Which commit message is the most helpful?
+"""
+prompt.distractors = [
+  "`update`",
+  "`fixed it`",
+  "`stuff for the arm and some other things`",
+]
+answer.answer = "`Stop intake rollers when the beam break sees a game piece`"
+context = """
+A good message says what changed, so anyone reading the history (including you, weeks later) can tell what the commit did without opening it.
+"""
+id = "82a495e8-1eec-4ec9-b8b5-f1a28d29982b"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Your reviewer asks you to change something in your pull request. How do you do it?
+"""
+prompt.distractors = [
+  "Close the pull request and open a new one",
+  "Make the change directly on `main`",
+  "Ask the reviewer to make it for you",
+]
+answer.answer = "Make the change on the same branch, commit, and push. The pull request updates by itself"
+context = """
+A pull request shows whatever is on its branch. Every new commit you push to that branch shows up in the pull request automatically.
+"""
+id = "633bc467-7ee4-4938-ac1f-3effdec9636d"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What does a red X next to your pull request mean?
+"""
+prompt.distractors = [
+  "Your reviewer rejected it",
+  "It has a merge conflict",
+  "It's been merged",
+]
+answer.answer = "GitHub tried to build it, and the build failed"
+context = """
+GitHub builds every pull request automatically. Clicking **Details** next to the X shows the build errors. Fix them, commit, and push, and GitHub tries again.
+"""
+id = "171d3eb3-967c-4e65-ab1f-0deed8c57980"

@@ -1,0 +1,47 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+We replaced the simple `SimArmIO` with one that uses `SingleJointedArmSim`. Which other classes had to change?
+"""
+prompt.distractors = [
+  "`Arm`, because it controls the arm",
+  "Every command that moves the arm",
+  "`DriverTeleop` and every autonomous opmode",
+]
+answer.answer = "None of them, because they only talk to an `ArmIO`"
+context = """
+`Arm` only knows that it has *some* `ArmIO`. Swapping in a better simulation, or the real hardware, doesn't change anything else. That's what the IO interface is for.
+"""
+id = "7945e5fe-bfac-4ed9-9ce2-309490a6e278"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Why does `update` multiply the throttle by `RobotController.getBatteryVoltage()`?
+"""
+prompt.distractors = [
+  "To make the arm move faster in the simulator",
+  "Because the simulator doesn't understand negative numbers",
+  "To check that the battery isn't empty",
+]
+answer.answer = "A motor really takes a voltage, and a throttle is a fraction of whatever the battery has"
+context = """
+A throttle of 0.5 means "half the battery." On a real robot, the battery's voltage changes as it runs down, so the same throttle doesn't always give the same push. Multiplying by the battery's voltage gives the simulator the voltage the motor would really get.
+"""
+id = "ec7215b0-6d92-42cf-b579-c686a8699b0e"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Why do we write `ArmConstants.LENGTH.in(Meters)` when making the `SingleJointedArmSim`, instead of just `ArmConstants.LENGTH`?
+"""
+prompt.distractors = [
+  "Because `LENGTH` is in inches",
+  "Because `.in(Meters)` makes the arm longer",
+  "It doesn't matter, both work",
+]
+answer.answer = "`SingleJointedArmSim` takes a plain number in meters, so we turn the `Distance` into one"
+context = """
+`LENGTH` is a `Distance`, which knows its own unit. `SingleJointedArmSim` wants a `double` in meters, so `.in(Meters)` gives it exactly that. You can see on the line which unit is going in.
+"""
+id = "c63a3906-a15a-4331-a60a-b590570ec2f2"

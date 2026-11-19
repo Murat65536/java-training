@@ -1,0 +1,47 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+`DriverTeleop` sets the arm's default command to `manualControl`. What is the arm's default command during autonomous?
+"""
+prompt.distractors = [
+  "`manualControl`, because it was set last",
+  "There isn't one, so the arm can't move in autonomous",
+  "Whichever command ran last in teleop",
+]
+answer.answer = "`idle()`, because a default command set in an opmode only lasts while that opmode is running"
+context = """
+WPILib keeps track of which opmode set each default command and each trigger binding. When `DriverTeleop` isn't running, its default command doesn't apply, so the arm goes back to `idle()`.
+"""
+id = "79c37ff4-4b7a-4e38-a637-65c24743a362"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Why should every robot have a "Do Nothing" autonomous opmode?
+"""
+prompt.distractors = [
+  "Because WPILib won't run without one",
+  "So the robot saves battery for teleop",
+  "Because autonomous routines can't be changed once a match starts",
+]
+answer.answer = "Sometimes the drivers need the robot to stay still, like when a mechanism is broken"
+context = """
+If moving would make things worse, or the routine might crash into an alliance partner, the drivers need a safe choice. Every mechanism's default command is `idle()`, so an opmode that does nothing keeps the robot still.
+"""
+id = "6ee564e8-7ea5-4594-a8b7-4ae056fb6f6f"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What does `name = "Score and Stow"` do in `@Autonomous(name = "Score and Stow")`?
+"""
+prompt.distractors = [
+  "It names the command that the opmode runs",
+  "It's the name of the file the class has to be in",
+  "It makes this the autonomous opmode that runs by default",
+]
+answer.answer = "It's the name the drivers see for this opmode in the Driver Station's list"
+context = """
+Without a name, the list would show the class's name, `ScoreAndStowAuto`. A short, clear name makes it easy for the drivers to pick the right routine right before a match.
+"""
+id = "38662a6b-a653-487b-800c-69f01bb3820e"

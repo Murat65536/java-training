@@ -1,0 +1,44 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+What does this print?
+
+```java
+Angle halfTurn = Rotations.of(0.5);
+System.out.println(halfTurn.in(Degrees));
+```
+"""
+prompt.distractors = ["0.5", "90.0", "It's an error, because `halfTurn` was made in rotations"]
+answer.answer = "180.0"
+context = """
+`halfTurn` is half a rotation, and `in(Degrees)` gives it back in degrees. Half of a full turn is 180 degrees. An `Angle` can be read in any angle unit, no matter which one it was made with.
+"""
+id = "1414dafe-962e-4432-8e63-5f24fd397d0a"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Why use `Angle` instead of a `double` for an angle?
+"""
+prompt.distractors = [
+  "An `Angle` is more precise than a `double`",
+  "You can't do math with a `double`",
+  "Motors only accept `Angle`s",
+]
+answer.answer = "An `Angle` knows its own unit, so you can't mix up degrees, radians, and rotations"
+context = """
+A `double` is just a number, so Java can't tell whether it means degrees or radians. An `Angle` keeps track of its unit, and converts for you whenever you ask for it in a different one.
+"""
+id = "97e267c1-d039-4d0a-810e-ff607f2d75f4"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+`a` and `b` are `Angle`s. Which of these checks whether `a` is smaller than `b`?
+"""
+prompt.distractors = ["`a < b`", "`a.in(b)`", "`a.isNear(b)`"]
+answer.answer = "`a.lt(b)`"
+context = """
+`<` only works on numbers, and an `Angle` is an object, so it has methods instead. `lt` means "less than." `isNear` checks whether two angles are close, and it also needs a tolerance.
+"""
+id = "98eba4de-17f8-4381-8566-09b5ee92f14c"
