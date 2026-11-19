@@ -134,12 +134,12 @@ Every word the book teaches, with a short reminder of what it means and a link t
 ## Working together
 
 - **Branch**: a separate line of commits, so you can work without changing anyone else's code. The shared one is **`main`**. ([Working Together](ch02-12-working-together.md))
-- **Clone**: make a copy of a repo on your laptop. ([Working Together](ch02-12-working-together.md))
-- **Commit**: a saved snapshot of the code, with a message saying what changed. ([Working Together](ch02-12-working-together.md))
-- **Git** and **GitHub**: the program that keeps track of every change to the code, and the website where our team shares it. ([Working Together](ch02-12-working-together.md))
+- **Clone**: make a copy of a repo on your laptop. ([Your First Program](ch01-01-first-program.md#saving-your-work), [Working Together](ch02-12-working-together.md))
+- **Commit**: a saved snapshot of the code, with a message saying what changed. ([Your First Program](ch01-01-first-program.md#saving-your-work), [Working Together](ch02-12-working-together.md))
+- **Git** and **GitHub**: the program that keeps track of every change to the code, and the website that stores it online, where you and the team can get to it. ([Your First Program](ch01-01-first-program.md#saving-your-work), [Working Together](ch02-12-working-together.md))
 - **Issue**: a task or bug, written down on GitHub with a number. ([Working Together](ch02-12-working-together.md))
 - **Merge**: add one branch's commits into another. A **merge conflict** is when two branches changed the same lines, and Git needs you to pick. ([Working Together](ch02-12-working-together.md))
 - **Pull request**: a request to merge your branch into `main`, where teammates review it first. ([Working Together](ch02-12-working-together.md))
-- **Push** and **pull**: send your commits to GitHub, and bring down everyone else's. ([Working Together](ch02-12-working-together.md))
-- **Repository**: a project that Git keeps track of, with its whole history. ([Working Together](ch02-12-working-together.md))
+- **Push** and **pull**: send your commits to GitHub, and bring down commits from GitHub that you don't have yet. ([Your First Program](ch01-01-first-program.md#saving-your-work), [Working Together](ch02-12-working-together.md))
+- **Repository**: a project that Git keeps track of, with its whole history. ([Your First Program](ch01-01-first-program.md#saving-your-work), [Working Together](ch02-12-working-together.md))
 - **Staging**: picking which changed files go into your next commit. ([Working Together](ch02-12-working-together.md))

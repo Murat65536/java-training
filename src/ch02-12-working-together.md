@@ -14,12 +14,7 @@ Git comes with a lot of vocabulary. These are the words you need:
 - **Merging** adds one branch's commits into another, as happens when a pull request is accepted.
 
 ## Getting set up
-You'll need a GitHub account. Make one at [github.com](https://github.com), then ask a mentor to add you to our team's GitHub organization so you can reach the robot code.
-Git is already installed on the robotics laptops, and WPILib VS Code knows how to use it. The first time you commit, Git needs to know who you are so it can put your name on your commits. Open VS Code's terminal (**Ctrl+\`**) and type these two lines, with your name and the email address you used for GitHub:
-```
-git config --global user.name "Your Name"
-git config --global user.email "you@example.com"
-```
+You already have a GitHub account and know how to commit, push and pull, from [Your First Program](ch01-01-first-program.md#saving-your-work). To reach the team's robot code, ask a mentor to add you to our team's GitHub organization.
 
 ### Cloning the robot code
 1. On GitHub, go to our robot code's repo. Click the green **Code** button and copy the link it shows.
@@ -93,7 +88,7 @@ If you're not sure which version is right, ask the person who made the other cha
 
 ## Try it yourself
 Practice the whole process on your own project, where nothing can go wrong:
-1. Open your `ArmRobot` project. In the **Source Control** panel, click **Publish to GitHub** and choose a **private** repository. That creates a repo for it on your own GitHub account, with everything you've written so far as the first commit.
+1. Open your `ArmRobot` project, which you've been backing up to GitHub since [Your First Robot Project](ch02-01-first-robot-project.md#saving-your-project).
 2. Make a branch named after the change you're about to make, like `arm-soft-limits`.
 3. Make a small change and commit it. If you haven't done the soft limits from [Real Hardware](ch02-11-real-hardware.md) yet, they're a perfect fit. Otherwise anything small works, like changing a constant.
 4. Push your branch and open a pull request on GitHub into your own `main`.
@@ -103,7 +98,7 @@ Practice the whole process on your own project, where nothing can go wrong:
 <details>
 <summary>What it should look like</summary>
 
-When you're done, your repo on GitHub has three commits on `main`: the first one with your whole project, the one from your pull request, and a "merge" commit that GitHub made when you merged it. The **Pull requests** tab shows your pull request as **Merged**, in purple.
-If **Publish to GitHub** asks you to sign in, go ahead. It opens a browser window to connect VS Code to your GitHub account. If you get stuck anywhere, ask a mentor. Git confuses everyone at first, and the only way to get comfortable with it is to use it a lot.
+When you're done, the newest commits on `main` in your repo on GitHub are the one from your pull request and a "merge" commit that GitHub made when you merged it. The **Pull requests** tab shows your pull request as **Merged**, in purple.
+If you get stuck anywhere, ask a mentor. Git confuses everyone at first, and the only way to get comfortable with it is to use it a lot.
 
 </details>

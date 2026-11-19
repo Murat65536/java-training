@@ -1,0 +1,41 @@
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "You're finished working for the day. What should you do before you leave?"
+prompt.distractors = [
+  "Save the file with Ctrl+S, and that's enough",
+  "Nothing, because VS Code backs everything up to GitHub automatically",
+  "Only commit, since a commit sends your work to GitHub",
+]
+answer.answer = "Commit, then push with **Sync Changes**"
+context = """
+Ctrl+S and committing only save your work on the laptop. Pushing is the step that sends it to GitHub, so your backup has everything.
+"""
+id = "c16590a2-170e-4e80-92de-213c8765b29d"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "You open `java-practice`, and the changes you pushed last time aren't there. What should you do?"
+prompt.distractors = [
+  "Write the changes again from memory",
+  "Delete the folder and make a new one",
+  "Push",
+]
+answer.answer = "Pull, to bring down your latest commits from GitHub"
+context = """
+Your pushed work is safe on GitHub. Pulling brings it into the folder. Do it before you change anything.
+"""
+id = "d7a647fa-f1a2-405f-9034-05a87f96d33c"
+
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = "Your whole `java-practice` folder is gone. How do you get it back?"
+prompt.distractors = [
+  "Make a new `java-practice` folder and start over",
+  "Pull, without opening any folder first",
+  "There's no way to get it back",
+]
+answer.answer = "Clone your repo from GitHub with `Git: Clone`"
+context = """
+Cloning copies your whole repo from GitHub back onto the laptop, with everything you've pushed.
+"""
+id = "cca72caa-c32b-47b0-944b-c9d4aadb2396"

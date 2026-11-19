@@ -136,3 +136,36 @@ Change your program so it prints three lines:
 1. Your name
 2. Your favorite color
 3. The answer to `1234 + 4321`. Let Java do the math.
+
+## Saving your work
+Files on a laptop can get lost, so you'll keep a backup of your work on **GitHub**, a website that stores code online. If anything happens to your files, you can get them back from there. VS Code talks to GitHub through a program called **Git**.
+
+### Setting it up
+You only do this once.
+1. Make a free account at [github.com](https://github.com).
+2. In VS Code, open the terminal with **Ctrl+\`** and type these two lines, using your name and the email address you used for GitHub:
+   ```
+   git config --global user.name "Your Name"
+   git config --global user.email "you@example.com"
+   ```
+   They tell Git whose name to put on your work. (If Git ever says it doesn't know who you are, type them again.)
+3. Open the **Source Control** panel with **Ctrl+Shift+G** and click **Publish to GitHub**. If VS Code asks you to sign in to GitHub, let it.
+4. Choose a **private** repository. When VS Code asks which files to include, leave them all checked and click **OK**.
+
+Your `java-practice` folder now has a backup on GitHub. A project stored this way is called a **repository**, or **repo**.
+
+### Every time you're done
+Before you leave, back up your work to GitHub. It takes two steps:
+1. **Commit.** In the Source Control panel, type a short message about what you did, like "Finish first program," and click **Commit**. A **commit** is a saved snapshot of your files. If VS Code asks whether to stage all your changes, click **Yes**.
+2. **Push.** Click **Sync Changes**. **Pushing** sends your commits up to GitHub.
+
+> [!IMPORTANT]
+> Commit and push every time you're done working, even if you only changed one line. Your backup only has what you've pushed.
+
+### Getting your work back
+- **If your `java-practice` folder is missing:** go to your repo on GitHub, click the green **Code** button, and copy the link it shows. In VS Code, press **Ctrl+Shift+P** to open the command palette (a search box for everything VS Code can do), pick `Git: Clone`, paste the link, and press Enter. Choose your `Documents` folder, and open the folder when VS Code asks. Copying a repo from GitHub like this is called **cloning** it.
+- **If the folder is there but your latest changes aren't:** open it, then click the **...** menu at the top of the Source Control panel and pick **Pull**. **Pulling** brings down the commits on GitHub that the folder doesn't have yet. Do this before you change anything.
+
+If a push or pull ever shows an error you don't understand, ask a mentor before you try anything else. Your work on GitHub is safe in the meantime.
+
+{{#quiz ../quizzes/ch01-01-saving.toml}}

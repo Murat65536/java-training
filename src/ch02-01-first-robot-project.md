@@ -170,6 +170,10 @@ To stop the simulation, close the Sim GUI window.
 
 {{#quiz ../quizzes/ch02-01-running.toml}}
 
+## Saving your project
+`ArmRobot` is a new folder, so it needs its own backup on GitHub. Publish it the same way you published `java-practice` in [Your First Program](ch01-01-first-program.md#saving-your-work): open the **Source Control** panel, click **Publish to GitHub**, and choose a **private** repository.
+You'll build on this one project for the rest of the book, so keep it backed up: commit and push every time you're done.
+
 ## Try it yourself
 Add a second command to `ExampleMechanism` called `sayHello`. It should print `Hello, robot!` once and then finish. Then, in `ExampleTeleop`, make it run once each time the driver presses the bottom face button on the controller, which is `faceDown()`. (WPILib names the face buttons by position, so the same code works on any kind of controller.)
 
