@@ -49,15 +49,15 @@ id = "651f6475-6b7f-4007-90b5-0bb0e341e300"
 [[questions]]
 type = "MultipleChoice"
 prompt.prompt = """
-You're about to enable brand-new arm code on the real robot for the first time. What should `MAX_VOLTAGE` be?
+You're testing the arm and it starts moving the wrong way. Nobody is near the robot. What should you press?
 """
 prompt.distractors = [
-  "The same as in the simulator, since the code already works there",
-  "12, so you can see if the motor works at all",
-  "0, so nothing can move",
+  "Space, to emergency stop it",
+  "Nothing, and let it reach the hard stop",
+  "The robot's power switch",
 ]
-answer.answer = "Much lower than normal, like 1 or 2 volts"
+answer.answer = "Enter, to disable it"
 context = """
-The simulator can't catch everything, like a motor that's inverted or a wrong CAN ID. Starting slow means that if something is wrong, it goes wrong slowly, and you have time to disable the robot.
+Disabling stops the robot, and you can enable it again as soon as you've fixed the problem. An emergency stop keeps the robot off until someone resets it, so save it for when someone could get hurt or something could break.
 """
-id = "f7aec16d-26be-4ae5-b7bc-121f44d6f925"
+id = "b9d81e38-db37-41b8-99d6-24133ad28b5e"

@@ -1,11 +1,11 @@
 # Real Hardware
 
-Everything so far has run in the simulator, which is the right place to start because nothing can break. Eventually, though, your code has to drive a real robot, with real motors strong enough to hurt someone. This lesson covers getting from the simulator to the real thing safely.
+Everything so far has run in the simulator, which is the right place to start because nothing can break. Eventually, though, your code has to drive a real robot. This lesson covers getting from the simulator to the real thing safely.
 
 ## What's on the robot
 The main electronic parts of an FRC robot, and what each one does:
 - The **robot controller** is the robot's brain, the computer that runs our code. Starting in 2027, it's called **Systemcore**. (Older robots used one called the **roboRIO**, a name you'll see often in older code and documentation.)
-- The **battery** powers everything through the **power distribution** board, which splits the power and sends it to every motor and device.
+- The **battery** powers everything through the **power distribution panel**, which splits the power and sends it to every motor and device.
 - Each motor has a **motor controller**, like REV's SPARK MAX, which decides how much of the battery's power reaches the motor. When our code calls `setVoltage`, the motor controller is what carries it out.
 - The **radio** connects the robot to the Driver Station laptop over Wi-Fi.
 
@@ -14,7 +14,9 @@ The robot controller talks to the motor controllers and many sensors over one lo
 ```java
 private final SparkMax motor = new SparkMax(CANPort.CAN_S0, ArmConstants.MOTOR_ID, MotorType.kBrushless);
 ```
-`CANPort.CAN_S0` says which of Systemcore's CAN ports the device is plugged into, and `MOTOR_ID` says which device it is. If two devices of the same kind share an ID, like two SPARK MAXes both set to 5, neither works properly, and the bug is confusing to track down. (Different kinds of devices, like a SPARK MAX and a CANcoder, can share an ID, but giving every device its own number keeps things simple.) You set a device's ID with its maker's app: the **REV Hardware Client** for REV devices, and **Phoenix Tuner X** for CTRE devices. Our team keeps a list of every device and its ID, and the IDs in the code have to match it.
+`CANPort.CAN_S0` says which of Systemcore's CAN ports the device is plugged into, and `MOTOR_ID` says which device it is.
+We don't pick CAN IDs at random. A motor's ID is the number of the channel it's wired to on the power distribution board. That way, if motor 5 acts up, you know to check channel 5, and if channel 5's breaker trips, you know it was motor 5. Devices without a channel of their own, like many sensors, get numbers that no channel uses.
+If two devices of the same kind share an ID, like two SPARK MAXes both set to 5, neither works properly, and the bug is confusing to track down. (Different kinds of devices, like a SPARK MAX and a CANcoder, can share an ID, but giving every device its own number keeps things simple.) You set a device's ID with its maker's app: **REV Hardware Client 2** for REV devices (not the original REV Hardware Client, which REV has replaced), and **Phoenix Tuner X** for CTRE devices. Our team keeps a list of every device and its ID, and the IDs in the code have to match it.
 
 ## Vendor libraries
 WPILib doesn't include code for every company's motors. Each company, or **vendor**, has its own library. To add one to a project, open the command palette, pick `WPILib: Manage Vendor Libraries`, then choose **Install new libraries (online)**. Our robot uses **REVLib** for REV's motors and **Phoenix 6** for CTRE's.
@@ -51,7 +53,7 @@ public class RealArmIO implements ArmIO {
 ```
 (These are REV's class names at the time of writing. REV renames things now and then, so if something here doesn't exist, check REV's documentation. The ideas stay the same.)
 The constructor makes a `SparkMaxConfig`, fills in the settings and sends them to the motor controller with `configure`. What each setting does:
-- **Inverted** flips the direction the motor spins. Depending on how a motor is mounted, positive voltage might turn it the "wrong" way, so the arm goes *down* when the code says up. Instead of scattering `-` signs through the code, you flip it once, here. Only testing tells you whether it needs flipping, so it's a constant.
+- **Inverted** flips the direction the motor spins. Depending on how a motor is mounted, positive voltage might turn it the "wrong" way, so the arm goes *down* when the code says up. Instead of scattering `-` signs through the code, you flip it once, here. Only testing tells you whether it needs flipping, so it's a constant. To test it, nudge the mechanism up with a button. If it goes down, flip `MOTOR_INVERTED`. Then check that the angle on the dashboard goes *up* too. If the motor is right but the angle goes the wrong way, the encoder is backward. A NEO's built-in encoder flips along with the motor, so this only happens with a separate encoder, and that encoder has its own inverted setting.
 - **Idle mode** sets what the motor does when it's told 0 volts. In **brake** mode it resists being turned, so the arm stays put instead of flopping. In **coast** mode it spins freely, which suits something like a flywheel that should spin down on its own.
 - **Current limit** caps how much electricity the motor can draw. A stuck motor, like an arm pushing against a hard stop, can draw so much current that it overheats, trips a breaker, or drags the battery so low that the whole robot shuts down for a moment. That's called a **brownout**, and it's one of the most common ways robots die in matches. A current limit, in amps, prevents it.
 
@@ -72,18 +74,13 @@ To put your code on the robot:
 
 Then open the **Driver Station**, the program the drive team uses to run the robot. Check that it shows communication with the robot, that robot code is running, and that the controllers are plugged in. Then pick your opmodes. Have a mentor show you around it the first time.
 
-## Running new code for the first time
-New code on a real robot is the riskiest moment in robot programming. The simulator catches most mistakes, but not all of them: an inverted motor, a wrong CAN ID, a constant that's far too big. So we follow the same steps every time:
-1. **Tell everyone.** Say "enabling!" loudly every time before you enable, and make sure nobody's hands are near the robot.
-2. **Know how to stop it.** Before enabling anything, have a mentor show you the Driver Station's keys for disabling and for emergency stop, and keep your hand ready. An emergency stop shuts everything off at once, and the robot stays off until it's restarted.
-3. **Put it on blocks.** When testing driving, prop the robot up so the wheels are off the ground. A drivetrain that runs backward can't go anywhere on blocks.
-4. **Start slow.** Turn `MAX_VOLTAGE` way down for the first test, to 1 or 2 volts, so that if something goes wrong, it goes wrong slowly.
-5. **Check directions first.** Nudge the mechanism up with a button. Does it really go up? Does the angle on the dashboard go *up* too? If the motor goes the wrong way, flip `MOTOR_INVERTED`. If the motor is right but the angle goes the wrong way, the encoder is backward. A NEO's built-in encoder flips along with the motor, so this only happens with a separate encoder, and that encoder has its own inverted setting.
-6. **Then tune.** Start from the gains you found in the simulator and tune them on the real thing, beginning with `KG`, the same way you did in [Simulating an Arm](ch02-06-simulating-an-arm.md).
-7. **Turn the speed back up** a little at a time, once everything works.
+## Staying safe
+Whenever you work with the real robot, follow these safety rules:
+1. **Call "clear."** Before you turn on or enable the robot, call out "Clear!" and check that nobody is close to it. Wait until someone responds "Clear!" before you go ahead.
+2. **Know how to stop it.** Press **Enter** to disable the robot and **space** to emergency stop it. A disabled robot can be enabled again right away. An emergency stop shuts everything off and keeps the robot off until someone resets the stop by holding **Esc** and **I** for a second. (On older robots an emergency stop can't be reset at all. The robot has to be restarted.)
 
 ## Try it yourself
-A **soft limit** is a limit in the code that stops a mechanism before it reaches its hard stop, the piece of metal it physically can't move past. Hitting a hard stop at full speed is rough on a mechanism, and pushing against one is exactly what draws too much current.
+A **soft limit** is a limit in the code that stops a mechanism before it reaches its hard stop, the piece of metal it physically can't move past. Hitting a hard stop at full speed is rough on a mechanism, and pushing against one also draws a lot of current.
 Add soft limits to `Arm`. If the arm is at or above `SOFT_MAX_ANGLE`, `setVoltage` shouldn't let it push any higher, and if it's at or below `SOFT_MIN_ANGLE`, it shouldn't push any lower. It should still be able to move *away* from a limit. Make `SOFT_MAX_ANGLE` 95 degrees and `SOFT_MIN_ANGLE` 0 degrees, in `ArmConstants`.
 
 *Hint: which direction is "up," in volts? And an `Angle` has comparison methods like `gte` and `lte`.*
